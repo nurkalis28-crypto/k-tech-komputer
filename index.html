@@ -1,0 +1,3815 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pesona Explore Aceh — Halal Tourism &amp; Travel Planner</title>
+  <meta name="description" content="Aplikasi web halal tourism untuk menemukan destinasi wisata, kuliner halal, akomodasi ramah Muslim, peta ilustratif, itinerary planner 1-5 hari, dan rekomendasi paket wisata di Aceh." />
+  <meta property="og:title" content="Pesona Explore Aceh — Halal Tourism &amp; Travel Planner" />
+  <meta property="og:description" content="Jelajahi wisata religi, bahari, sejarah, budaya, kuliner halal, dan akomodasi ramah Muslim di Banda Aceh, Sabang, Aceh Besar, Aceh Tengah, dan Bener Meriah." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-canvas: #FAFBF9;
+      --bg-surface: #FFFFFF;
+      --bg-tinted: #F1F6F3;
+      --bg-dark: #0B2720;
+      --ink-primary: #0F231D;
+      --ink-secondary: #41564F;
+      --ink-muted: #647871;
+      --border-hairline: #DAE5DF;
+      --border-strong: #B8CBC2;
+      --emerald: #056347;
+      --emerald-hover: #044D37;
+      --emerald-soft: #E6F2ED;
+      --turquoise: #0D8A7E;
+      --turquoise-soft: #E5F4F2;
+      --gold: #B07C1B;
+      --gold-bright: #D4A13B;
+      --gold-soft: #FBF5E8;
+      --danger: #B42318;
+      --danger-soft: #FEF3F2;
+      --warning: #9A5B13;
+      --warning-soft: #FEF7EC;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --shadow-card: 0 1px 2px rgba(15, 35, 29, 0.04), 0 6px 20px rgba(15, 35, 29, 0.04);
+      --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--ink-primary);
+      background-color: var(--bg-canvas);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
+
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    .tabular { font-variant-numeric: tabular-nums; font-family: var(--font-mono); }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header: Strict 3-Zone Top Bar Contract */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(250, 251, 249, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-hairline);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      height: 64px;
+    }
+    .brand-wordmark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--ink-primary);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .brand-mark { color: var(--emerald); flex-shrink: 0; }
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .nav-link {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--ink-secondary);
+      white-space: nowrap;
+      flex-shrink: 0;
+      padding: 6px 0;
+      border-bottom: 2px solid transparent;
+      transition: color var(--transition), border-color var(--transition);
+    }
+    .nav-link:hover {
+      color: var(--emerald);
+      border-bottom-color: var(--gold-bright);
+    }
+    .header-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      min-height: 40px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: var(--emerald);
+      color: #FFFFFF;
+      font-size: 0.875rem;
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .header-cta:hover { background: var(--emerald-hover); }
+    .header-cta:active { transform: translateY(1px); }
+
+    .mobile-menu-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      color: var(--ink-primary);
+    }
+    .mobile-drawer {
+      display: none;
+      border-top: 1px solid var(--border-hairline);
+      background: var(--bg-surface);
+      padding: 16px 24px 20px;
+    }
+    .mobile-drawer.open { display: flex; flex-direction: column; gap: 10px; }
+    .mobile-drawer a {
+      padding: 10px 4px;
+      font-weight: 500;
+      border-bottom: 1px solid var(--bg-tinted);
+    }
+
+    /* Utility Ribbon below header */
+    .utility-ribbon {
+      background: var(--bg-tinted);
+      border-bottom: 1px solid var(--border-hairline);
+    }
+    .utility-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 0;
+      flex-wrap: wrap;
+    }
+    .utility-note {
+      font-size: 0.8125rem;
+      color: var(--ink-secondary);
+      margin: 0;
+    }
+    .utility-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .lang-switch {
+      display: inline-flex;
+      padding: 3px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+    }
+    .lang-btn {
+      border: none;
+      background: transparent;
+      padding: 5px 12px;
+      min-height: 32px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 4px;
+      color: var(--ink-secondary);
+      white-space: nowrap;
+      transition: background var(--transition), color var(--transition);
+    }
+    .lang-btn.active {
+      background: var(--emerald);
+      color: #FFFFFF;
+    }
+    .fav-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      min-height: 38px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-strong);
+      background: var(--bg-surface);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ink-primary);
+      white-space: nowrap;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .fav-trigger:hover {
+      border-color: var(--emerald);
+      background: var(--emerald-soft);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding: 48px 0 40px;
+      background: var(--bg-canvas);
+    }
+    .hero-split {
+      display: grid;
+      grid-template-columns: 1.05fr 1.15fr;
+      gap: 40px;
+      align-items: stretch;
+    }
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8px 0;
+    }
+    .editorial-kicker {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 0 0 14px;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.35rem, 4.1vw, 3.65rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.015em;
+      color: var(--ink-primary);
+      margin: 0 0 20px;
+      text-wrap: balance;
+      max-width: 16ch;
+    }
+    .hero-desc {
+      font-size: 1.025rem;
+      line-height: 1.65;
+      color: var(--ink-secondary);
+      margin: 0 0 28px;
+      max-width: 54ch;
+    }
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      min-height: 44px;
+      border-radius: var(--radius-sm);
+      border: none;
+      background: var(--emerald);
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      white-space: nowrap;
+      transition: background var(--transition);
+    }
+    .btn-primary:hover { background: var(--emerald-hover); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 20px;
+      min-height: 44px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-strong);
+      background: var(--bg-surface);
+      color: var(--ink-primary);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      white-space: nowrap;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .btn-secondary:hover {
+      border-color: var(--emerald);
+      background: var(--emerald-soft);
+    }
+    .btn-sm {
+      padding: 8px 14px;
+      min-height: 38px;
+      font-size: 0.835rem;
+    }
+    .btn-danger {
+      border-color: #F3C4BF;
+      color: var(--danger);
+      background: var(--bg-surface);
+    }
+    .btn-danger:hover {
+      background: var(--danger-soft);
+      border-color: var(--danger);
+    }
+
+    .hero-media {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-hairline);
+      background: var(--bg-dark);
+      min-height: 360px;
+    }
+    .hero-media img {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background: linear-gradient(180deg, rgba(11, 39, 32, 0.05) 45%, rgba(11, 39, 32, 0.84) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      color: #FFFFFF;
+    }
+    .hero-caption-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin: 0 0 4px;
+    }
+    .hero-caption-sub {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.86);
+      margin: 0;
+    }
+
+    /* 4-column Strip below Hero */
+    .pillars-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 36px;
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      overflow: hidden;
+    }
+    .pillar-cell {
+      padding: 20px 22px;
+      border-right: 1px solid var(--border-hairline);
+    }
+    .pillar-cell:last-child { border-right: none; }
+    .pillar-num {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--emerald);
+      margin: 0 0 6px;
+    }
+    .pillar-desc {
+      font-size: 0.84rem;
+      color: var(--ink-secondary);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Aceh Motif Section Divider */
+    .motif-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 12px 0;
+      color: var(--gold);
+    }
+    .motif-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border-hairline);
+    }
+
+    /* Section Containers */
+    .section-block {
+      padding: 56px 0;
+    }
+    .section-tinted {
+      background: var(--bg-tinted);
+      border-top: 1px solid var(--border-hairline);
+      border-bottom: 1px solid var(--border-hairline);
+    }
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 2.8vw, 2.35rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin: 0 0 8px;
+      color: var(--ink-primary);
+      text-wrap: balance;
+    }
+    .section-subtitle {
+      margin: 0;
+      color: var(--ink-secondary);
+      max-width: 64ch;
+      font-size: 0.96rem;
+    }
+
+    /* Filter Toolbar */
+    .filter-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .filter-top-row {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 14px;
+      align-items: center;
+    }
+    .input-field, .select-field, .textarea-field {
+      width: 100%;
+      padding: 10px 14px;
+      min-height: 42px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-strong);
+      background: var(--bg-surface);
+      color: var(--ink-primary);
+      font-size: 0.9rem;
+      transition: border-color var(--transition);
+    }
+    .input-field:focus, .select-field:focus, .textarea-field:focus {
+      outline: none;
+      border-color: var(--emerald);
+      box-shadow: 0 0 0 3px rgba(5, 99, 71, 0.12);
+    }
+    .filter-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .filter-label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--ink-muted);
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .seg-btn {
+      padding: 7px 14px;
+      min-height: 36px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-hairline);
+      background: var(--bg-canvas);
+      color: var(--ink-secondary);
+      font-size: 0.835rem;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+    }
+    .seg-btn:hover {
+      border-color: var(--emerald);
+      color: var(--emerald);
+    }
+    .seg-btn.active {
+      background: var(--emerald);
+      border-color: var(--emerald);
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .editorial-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .editorial-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card);
+    }
+    .card-media {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      background: var(--bg-dark);
+      overflow: hidden;
+    }
+    .card-media img {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .card-svg-fallback {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+    }
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 18px 20px 20px;
+      gap: 10px;
+    }
+    .meta-line {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      line-height: 1.22;
+      margin: 0;
+      color: var(--ink-primary);
+    }
+    .card-desc {
+      font-size: 0.89rem;
+      color: var(--ink-secondary);
+      margin: 0;
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-info-rows {
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-hairline);
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      font-size: 0.82rem;
+      color: var(--ink-secondary);
+    }
+    .status-text { font-weight: 600; }
+    .status-verified { color: var(--emerald); }
+    .status-pending { color: var(--warning); }
+    .status-unverified { color: var(--ink-muted); }
+
+    .card-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-top: 8px;
+      flex-wrap: wrap;
+    }
+    .icon-fav-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-strong);
+      background: var(--bg-surface);
+      color: var(--ink-secondary);
+      flex-shrink: 0;
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+    }
+    .icon-fav-btn.saved {
+      background: var(--gold-soft);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Interactive SVG Map Section */
+    .map-layout {
+      display: grid;
+      grid-template-columns: 1.25fr 0.95fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+    .svg-map-frame {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .aceh-svg-map {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-hairline);
+      background: #E8F3F1;
+    }
+    .map-pin { cursor: pointer; transition: transform 150ms ease; }
+    .map-pin:hover circle.pin-outer { stroke-width: 3.5; }
+    .map-inspector {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .inspector-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 240px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .inspector-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-sm);
+      background: var(--bg-canvas);
+      text-align: left;
+      width: 100%;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .inspector-item.active, .inspector-item:hover {
+      border-color: var(--emerald);
+      background: var(--emerald-soft);
+    }
+
+    /* Transparency Notice (No border-l-4 cliché!) */
+    .notice-box {
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      border: 1px solid #E4D2A7;
+      background: var(--gold-soft);
+      color: var(--ink-primary);
+      font-size: 0.88rem;
+      line-height: 1.55;
+      margin-bottom: 24px;
+    }
+
+    /* Tabs */
+    .tabs-bar {
+      display: inline-flex;
+      gap: 6px;
+      padding: 5px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      padding: 9px 18px;
+      min-height: 40px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--ink-secondary);
+      font-weight: 600;
+      font-size: 0.89rem;
+      white-space: nowrap;
+      transition: background var(--transition), color var(--transition);
+    }
+    .tab-btn.active {
+      background: var(--emerald);
+      color: #FFFFFF;
+    }
+
+    /* Planner & Budget Calculator */
+    .planner-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 0.85fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .surface-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      padding: 24px;
+    }
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .form-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .field-label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--ink-secondary);
+    }
+    .day-block {
+      margin-top: 18px;
+      border-top: 1px solid var(--border-hairline);
+      padding-top: 16px;
+    }
+    .day-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .activity-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-sm);
+      background: var(--bg-canvas);
+      margin-bottom: 8px;
+    }
+    .budget-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-hairline);
+      font-size: 0.9rem;
+    }
+    .budget-total {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-top: 14px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--emerald);
+    }
+
+    /* Package Recommendation Cards */
+    .pkg-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+    .pkg-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* CRUD Data Table */
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+    }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      text-align: left;
+    }
+    .data-table th {
+      padding: 12px 16px;
+      background: var(--bg-tinted);
+      border-bottom: 1px solid var(--border-hairline);
+      font-weight: 600;
+      color: var(--ink-secondary);
+      white-space: nowrap;
+    }
+    .data-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-hairline);
+      vertical-align: middle;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: #F8FBFA; }
+
+    /* Modal & Slide-over Drawer */
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: rgba(11, 39, 32, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .backdrop.open { display: flex; }
+    .modal-panel {
+      width: 100%;
+      max-width: 720px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-hairline);
+      padding: 28px;
+      box-shadow: 0 24px 60px rgba(11, 39, 32, 0.25);
+    }
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 65;
+      background: rgba(11, 39, 32, 0.45);
+      display: none;
+      justify-content: flex-end;
+    }
+    .drawer-backdrop.open { display: flex; }
+    .drawer-panel {
+      width: 100%;
+      max-width: 440px;
+      height: 100%;
+      overflow-y: auto;
+      background: var(--bg-surface);
+      border-left: 1px solid var(--border-hairline);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .modal-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .close-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-hairline);
+      background: var(--bg-canvas);
+      font-size: 1.2rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    /* Toast Feedback */
+    .toast-banner {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 80;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-dark);
+      color: #FFFFFF;
+      font-size: 0.875rem;
+      font-weight: 500;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity var(--transition), transform var(--transition);
+    }
+    .toast-banner.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Footer */
+    .site-footer {
+      background: var(--bg-dark);
+      color: rgba(255, 255, 255, 0.88);
+      padding: 44px 0 32px;
+      border-top: 3px solid var(--gold);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 32px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    }
+    .footer-bottom {
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.68);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 24px;
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      color: var(--ink-secondary);
+    }
+
+    @media (max-width: 1024px) {
+      .hero-split, .map-layout, .planner-grid { grid-template-columns: 1fr; }
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .pillars-strip { grid-template-columns: repeat(2, 1fr); }
+      .pillar-cell:nth-child(2) { border-right: none; }
+      .pillar-cell:nth-child(1), .pillar-cell:nth-child(2) { border-bottom: 1px solid var(--border-hairline); }
+      .pkg-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .main-nav, .header-cta { display: none; }
+      .mobile-menu-btn { display: inline-flex; }
+      .cards-grid, .form-grid-2, .form-grid-3 { grid-template-columns: 1fr; }
+      .filter-top-row { grid-template-columns: 1fr; }
+      .pillars-strip { grid-template-columns: 1fr; }
+      .pillar-cell { border-right: none; border-bottom: 1px solid var(--border-hairline); }
+      .pillar-cell:last-child { border-bottom: none; }
+      .container { padding: 0 16px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Zone 1-2-3 Top Bar Contract -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#beranda" class="brand-wordmark">
+        <svg class="brand-mark" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 2L14.5 7.5L20 10L14.5 12.5L12 18L9.5 12.5L4 10L9.5 7.5L12 2Z" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="12" cy="10" r="2.2" fill="#B07C1B"/>
+          <path d="M5 20H19" stroke="#B07C1B" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <span>Pesona Explore Aceh</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Navigasi Utama">
+        <a href="#destinasi" class="nav-link" data-i18n="nav_destinasi">Destinasi</a>
+        <a href="#peta" class="nav-link" data-i18n="nav_peta">Peta &amp; Wilayah</a>
+        <a href="#kuliner-akomodasi" class="nav-link" data-i18n="nav_kuliner">Kuliner &amp; Akomodasi</a>
+        <a href="#perencanaan" class="nav-link" data-i18n="nav_rencana">Rencana &amp; Paket</a>
+        <a href="#kelola" class="nav-link" data-i18n="nav_crud">Kelola Data</a>
+      </nav>
+
+      <a href="#perencanaan" class="header-cta" data-i18n="nav_cta">Rencanakan Trip</a>
+
+      <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-expanded="false" aria-label="Buka menu navigasi">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M4 7h16M4 12h16M4 17h16"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-drawer" id="mobileDrawer">
+      <a href="#destinasi" data-i18n="nav_destinasi">Destinasi</a>
+      <a href="#peta" data-i18n="nav_peta">Peta &amp; Wilayah</a>
+      <a href="#kuliner-akomodasi" data-i18n="nav_kuliner">Kuliner &amp; Akomodasi</a>
+      <a href="#perencanaan" data-i18n="nav_rencana">Rencana &amp; Paket</a>
+      <a href="#kelola" data-i18n="nav_crud">Kelola Data</a>
+    </div>
+  </header>
+
+  <!-- Below-Header Editorial Utility Bar (Language, Favorites, Simulation Transparency) -->
+  <div class="utility-ribbon">
+    <div class="container utility-inner">
+      <p class="utility-note" data-i18n="utility_notice">
+        Prototipe Pariwisata Halal Aceh · Harga &amp; kontak adalah data simulasi · Fasilitas ramah Muslim dibedakan dari sertifikasi halal resmi.
+      </p>
+      <div class="utility-actions">
+        <div class="lang-switch" role="group" aria-label="Pilih Bahasa">
+          <button type="button" class="lang-btn active" id="langIdBtn" data-lang="id">ID</button>
+          <button type="button" class="lang-btn" id="langEnBtn" data-lang="en">EN</button>
+        </div>
+        <button type="button" class="fav-trigger" id="openFavBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M12 21s-7-4.35-9.33-8.28C.68 9.39 2.4 5 6.5 5c2.2 0 3.7 1.2 5.5 3.1C13.8 6.2 15.3 5 17.5 5c4.1 0 5.82 4.39 3.83 7.72C19 16.65 12 21 12 21z"/>
+          </svg>
+          <span id="favTriggerLabel">Favorit (0)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="beranda" class="hero-section">
+      <div class="container">
+        <div class="hero-split">
+          <div class="hero-copy">
+            <p class="editorial-kicker" data-i18n="hero_kicker">Serambi Mekkah · Banda Aceh · Sabang · Gayo</p>
+            <h1 class="hero-title" data-i18n="hero_title">Jelajahi Warisan Islam, Bahari, dan Dataran Tinggi Aceh</h1>
+            <p class="hero-desc" data-i18n="hero_desc">
+              Panduan wisata ramah Muslim untuk menemukan destinasi religi, terumbu karang Sabang, perkebunan kopi Gayo, kuliner lokal, dan penginapan nyaman lengkap dengan informasi fasilitas ibadah serta perencana perjalanan 1–5 hari.
+            </p>
+            <div class="hero-cta-row">
+              <a href="#destinasi" class="btn-primary" data-i18n="hero_cta_primary">Jelajahi Destinasi</a>
+              <a href="#perencanaan" class="btn-secondary" data-i18n="hero_cta_secondary">Susun Itinerary &amp; Anggaran</a>
+            </div>
+          </div>
+
+          <div class="hero-media">
+            <svg class="card-svg-fallback" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <linearGradient id="heroSky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0B2720"/>
+                  <stop offset="55%" stop-color="#0E4A3A"/>
+                  <stop offset="100%" stop-color="#D4A13B" stop-opacity="0.35"/>
+                </linearGradient>
+              </defs>
+              <rect width="800" height="450" fill="url(#heroSky)"/>
+              <path d="M210 340 V235 Q400 120 590 235 V340 Z" fill="#0E5A45"/>
+              <path d="M335 225 Q400 140 465 225 Z" fill="#112A23"/>
+              <path d="M245 245 Q285 185 325 245 Z" fill="#112A23"/>
+              <path d="M475 245 Q515 185 555 245 Z" fill="#112A23"/>
+              <rect x="160" y="340" width="480" height="12" fill="#D4A13B" opacity="0.75"/>
+              <rect x="220" y="362" width="360" height="60" fill="#0D8A7E" opacity="0.35"/>
+            </svg>
+            <img
+              src="/src/assets/images/hero_baiturrahman_aceh_1795590347260.jpg"
+              alt="Masjid Raya Baiturrahman Banda Aceh pada senja hari"
+              referrerpolicy="no-referrer"
+              onerror="this.style.display='none'"
+            />
+            <div class="hero-scrim">
+              <p class="hero-caption-title" data-i18n="hero_fig_title">Masjid Raya Baiturrahman, Banda Aceh</p>
+              <p class="hero-caption-sub" data-i18n="hero_fig_sub">Ikon wisata religi dan sejarah peradaban Islam Nusantara.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pillars-strip" aria-label="Ringkasan Cakupan Aplikasi">
+          <div class="pillar-cell">
+            <p class="pillar-num" data-i18n="pillar_1_t">01. Lima Wilayah Aceh</p>
+            <p class="pillar-desc" data-i18n="pillar_1_d">Banda Aceh, Sabang, Aceh Besar, Aceh Tengah, dan Bener Meriah dalam satu katalog.</p>
+          </div>
+          <div class="pillar-cell">
+            <p class="pillar-num" data-i18n="pillar_2_t">02. Fasilitas Ibadah Jelas</p>
+            <p class="pillar-desc" data-i18n="pillar_2_d">Setiap destinasi memuat rincian mushalla, tempat wudhu, dan keterangan verifikasi lokasi.</p>
+          </div>
+          <div class="pillar-cell">
+            <p class="pillar-num" data-i18n="pillar_3_t">03. Transparansi Status Halal</p>
+            <p class="pillar-desc" data-i18n="pillar_3_d">Membedakan sertifikasi halal resmi beserta sumbernya dari klaim ramah Muslim.</p>
+          </div>
+          <div class="pillar-cell">
+            <p class="pillar-num" data-i18n="pillar_4_t">04. Itinerary 1–5 Hari</p>
+            <p class="pillar-desc" data-i18n="pillar_4_d">Kalkulator anggaran simulasi &amp; rekomendasi paket berbasis minat tersimpan di browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ornamental Pinto Aceh Hairline Divider -->
+    <div class="container">
+      <div class="motif-divider" aria-hidden="true">
+        <div class="motif-line"></div>
+        <svg width="36" height="16" viewBox="0 0 36 16" fill="none">
+          <path d="M2 8L8 2L14 8L8 14L2 8Z" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M12 8L18 2L24 8L18 14L12 8Z" stroke="#056347" stroke-width="1.2"/>
+          <path d="M22 8L28 2L34 8L28 14L22 8Z" stroke="currentColor" stroke-width="1.2"/>
+        </svg>
+        <div class="motif-line"></div>
+      </div>
+    </div>
+
+    <!-- Section 2: Katalog Destinasi Wisata -->
+    <section id="destinasi" class="section-block">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="editorial-kicker" data-i18n="dest_kicker">Katalog Kurasi</p>
+            <h2 class="section-title" data-i18n="dest_title">Destinasi Wisata Halal &amp; Budaya Aceh</h2>
+            <p class="section-subtitle" data-i18n="dest_subtitle">
+              Temukan destinasi religi, alam, bahari, sejarah, budaya, dan sentra kuliner. Informasi yang belum terverifikasi lapangan ditandai secara transparan.
+            </p>
+          </div>
+          <span class="meta-line tabular" id="destCountLabel">15 destinasi</span>
+        </div>
+
+        <div class="filter-panel">
+          <div class="filter-top-row">
+            <input
+              type="search"
+              id="destSearchInput"
+              class="input-field"
+              placeholder="Cari destinasi, lokasi, atau fasilitas ibadah..."
+              aria-label="Cari destinasi wisata"
+            />
+            <select id="destSortSelect" class="select-field" aria-label="Urutkan destinasi">
+              <option value="featured" data-i18n="sort_featured">Urutan: Unggulan</option>
+              <option value="cost_asc" data-i18n="sort_cost_asc">Biaya Terendah (Simulasi)</option>
+              <option value="cost_desc" data-i18n="sort_cost_desc">Biaya Tertinggi (Simulasi)</option>
+              <option value="name_asc" data-i18n="sort_name_asc">Nama A–Z</option>
+            </select>
+          </div>
+
+          <div class="filter-row" id="regionFilterBar" role="group" aria-label="Filter Wilayah"></div>
+          <div class="filter-row" id="categoryFilterBar" role="group" aria-label="Filter Kategori"></div>
+        </div>
+
+        <div id="destinationsGrid" class="cards-grid"></div>
+      </div>
+    </section>
+
+    <!-- Section 3: Peta Ilustratif SVG & Tautan Google Maps -->
+    <section id="peta" class="section-block section-tinted">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="editorial-kicker" data-i18n="map_kicker">Geografi Wisata Aceh</p>
+            <h2 class="section-title" data-i18n="map_title">Peta Ilustratif Wilayah &amp; Akses Google Maps</h2>
+            <p class="section-subtitle" data-i18n="map_subtitle">
+              Pilih titik wilayah atau pin destinasi pada peta vektor ilustratif untuk memeriksa lokasi, fasilitas ibadah, dan membuka tautan Google Maps langsung tanpa API key.
+            </p>
+          </div>
+        </div>
+
+        <div class="map-layout">
+          <div class="svg-map-frame">
+            <div class="filter-row" id="mapRegionButtons"></div>
+            <svg class="aceh-svg-map" viewBox="0 0 760 480" role="img" aria-label="Peta ilustratif wisata Aceh meliputi Sabang, Banda Aceh, Aceh Besar, Bener Meriah, dan Aceh Tengah">
+              <defs>
+                <linearGradient id="seaGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#DDF1EE"/>
+                  <stop offset="100%" stop-color="#C8E6E1"/>
+                </linearGradient>
+                <linearGradient id="landGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#EEF5F0"/>
+                  <stop offset="100%" stop-color="#DCEAE1"/>
+                </linearGradient>
+              </defs>
+              <rect width="760" height="480" fill="url(#seaGrad)"/>
+              <!-- Subtle sea latitude lines -->
+              <path d="M0 110H760M0 230H760M0 350H760" stroke="#B6DBD5" stroke-width="0.8" stroke-dasharray="4 6"/>
+              <path d="M160 0V480M360 0V480M560 0V480" stroke="#B6DBD5" stroke-width="0.8" stroke-dasharray="4 6"/>
+
+              <!-- Pulau Weh / Sabang -->
+              <path d="M115 72 C135 55, 178 58, 192 84 C205 108, 185 136, 152 138 C126 140, 102 106, 115 72 Z"
+                    fill="#D4E8DF" stroke="#056347" stroke-width="1.6"/>
+              <text x="150" y="50" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="12" font-weight="700" fill="#0F231D">Sabang (Pulau Weh)</text>
+
+              <!-- Mainland Aceh Northern & Highland Spine -->
+              <path d="M165 186 C195 168, 250 165, 310 175 C390 188, 495 205, 620 228 L760 250 L760 480 L235 480 C215 410, 185 335, 158 265 C144 230, 146 200, 165 186 Z"
+                    fill="url(#landGrad)" stroke="#056347" stroke-width="1.8"/>
+
+              <!-- Region Highlight Zones -->
+              <ellipse cx="215" cy="205" rx="46" ry="30" fill="#056347" fill-opacity="0.09" stroke="#056347" stroke-dasharray="3 3" stroke-width="1"/>
+              <text x="215" y="162" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="12" font-weight="700" fill="#0F231D">Banda Aceh</text>
+
+              <ellipse cx="275" cy="275" rx="68" ry="48" fill="#0D8A7E" fill-opacity="0.09" stroke="#0D8A7E" stroke-dasharray="3 3" stroke-width="1"/>
+              <text x="275" y="338" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="12" font-weight="700" fill="#0F231D">Aceh Besar</text>
+
+              <ellipse cx="495" cy="300" rx="65" ry="44" fill="#B07C1B" fill-opacity="0.1" stroke="#B07C1B" stroke-dasharray="3 3" stroke-width="1"/>
+              <text x="495" y="246" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="12" font-weight="700" fill="#0F231D">Bener Meriah</text>
+
+              <ellipse cx="520" cy="392" rx="78" ry="48" fill="#056347" fill-opacity="0.1" stroke="#056347" stroke-dasharray="3 3" stroke-width="1"/>
+              <text x="520" y="454" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="12" font-weight="700" fill="#0F231D">Aceh Tengah (Gayo)</text>
+
+              <!-- Danau Laut Tawar illustration -->
+              <path d="M510 385 C532 375, 565 378, 578 392 C572 406, 535 408, 510 396 Z" fill="#0D8A7E" fill-opacity="0.45" stroke="#0D8A7E" stroke-width="1"/>
+
+              <!-- Route connection lines -->
+              <path d="M155 125 L205 185 L265 255 L485 305 L515 385" fill="none" stroke="#B07C1B" stroke-width="1.5" stroke-dasharray="5 4"/>
+
+              <!-- Compass Rose -->
+              <g transform="translate(690, 62)" aria-hidden="true">
+                <circle cx="0" cy="0" r="24" fill="#FFFFFF" fill-opacity="0.85" stroke="#B8CBC2"/>
+                <path d="M0 -18 L5 0 L0 18 L-5 0 Z" fill="#056347"/>
+                <path d="M-18 0 L0 -5 L18 0 L0 5 Z" fill="#B07C1B" fill-opacity="0.65"/>
+                <text x="0" y="-28" text-anchor="middle" font-size="10" font-weight="700" fill="#0F231D">U</text>
+              </g>
+
+              <!-- Dynamic Destination Pins injected here -->
+              <g id="svgMapPins"></g>
+            </svg>
+          </div>
+
+          <div class="map-inspector" id="mapInspector"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Kuliner Halal, Produk UMKM & Akomodasi Ramah Muslim -->
+    <section id="kuliner-akomodasi" class="section-block">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="editorial-kicker" data-i18n="ka_kicker">UMKM &amp; Hospitalitas</p>
+            <h2 class="section-title" data-i18n="ka_title">Kuliner Halal, Produk UMKM &amp; Akomodasi Ramah Muslim</h2>
+            <p class="section-subtitle" data-i18n="ka_subtitle">
+              Telusuri ragam kuliner autentik dan penginapan nyaman di Aceh lengkap dengan kejelasan status verifikasi sertifikat halal serta kontak WhatsApp mode demo.
+            </p>
+          </div>
+        </div>
+
+        <div class="notice-box" data-i18n="halal_transparency_note">
+          <strong>Catatan Kepatuhan &amp; Verifikasi:</strong> Aplikasi membedakan secara tegas antara <strong>Status Sertifikasi Halal Resmi</strong> (produk kuliner/UMKM yang merujuk sumber verifikasi BPJPH/MPU contoh atau ditandai belum bersertifikat) dengan <strong>Fasilitas Ramah Muslim</strong> pada akomodasi (arah kiblat, perlengkapan shalat, lingkungan bebas alkohol). Tarif dan nomor kontak WhatsApp adalah data simulasi.
+        </div>
+
+        <div class="tabs-bar" role="tablist" aria-label="Pilih Katalog Layanan">
+          <button type="button" class="tab-btn active" id="tabKulinerBtn" role="tab" aria-selected="true" data-i18n="tab_kuliner">Kuliner Halal &amp; UMKM</button>
+          <button type="button" class="tab-btn" id="tabAkomodasiBtn" role="tab" aria-selected="false" data-i18n="tab_akomodasi">Akomodasi Ramah Muslim</button>
+        </div>
+
+        <div class="filter-panel" id="kaFilterPanel"></div>
+        <div class="cards-grid" id="kaGrid"></div>
+      </div>
+    </section>
+
+    <!-- Section 5: Rekomendasi Paket Wisata & Itinerary Planner 1-5 Hari + Kalkulator Anggaran -->
+    <section id="perencanaan" class="section-block section-tinted">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="editorial-kicker" data-i18n="plan_kicker">Perencanaan Perjalanan</p>
+            <h2 class="section-title" data-i18n="plan_title">Rekomendasi Paket Wisata &amp; Itinerary Planner (1–5 Hari)</h2>
+            <p class="section-subtitle" data-i18n="plan_subtitle">
+              Gunakan penyaring berbasis aturan (rule-based filtering) untuk menemukan paket wisata sesuai minat dan anggaran, atau susun jadwal harian sendiri dengan kalkulator biaya otomatis.
+            </p>
+          </div>
+        </div>
+
+        <div class="tabs-bar" role="tablist" aria-label="Mode Perencanaan">
+          <button type="button" class="tab-btn active" id="tabPlannerBtn" role="tab" aria-selected="true" data-i18n="tab_itinerary">Itinerary Planner &amp; Kalkulator</button>
+          <button type="button" class="tab-btn" id="tabPackagesBtn" role="tab" aria-selected="false" data-i18n="tab_packages">Rekomendasi Paket (Rule-Based)</button>
+        </div>
+
+        <!-- Panel A: Itinerary Planner & Budget Calculator -->
+        <div id="plannerPanel" class="planner-grid">
+          <div class="surface-box">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px;">
+              <h3 style="font-family:var(--font-display);font-size:1.45rem;margin:0;" data-i18n="itin_heading">Penyusun Rencana Perjalanan</h3>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <select id="savedItinerarySelect" class="select-field" style="width:auto;min-width:190px;" aria-label="Pilih itinerary tersimpan"></select>
+                <button type="button" class="btn-secondary btn-sm" id="newItineraryBtn" data-i18n="btn_new_itin">+ Baru</button>
+                <button type="button" class="btn-secondary btn-sm btn-danger" id="deleteItineraryBtn" data-i18n="btn_del_itin">Hapus</button>
+              </div>
+            </div>
+
+            <div class="form-grid-2" style="margin-bottom:14px;">
+              <div class="field-group">
+                <label class="field-label" for="itinNameInput" data-i18n="lbl_trip_name">Nama Perjalanan</label>
+                <input type="text" id="itinNameInput" class="input-field" />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="itinDateInput" data-i18n="lbl_start_date">Tanggal Mulai</label>
+                <input type="date" id="itinDateInput" class="input-field" />
+              </div>
+            </div>
+
+            <div class="form-grid-2" style="margin-bottom:18px;">
+              <div class="field-group">
+                <label class="field-label" for="itinDaysSelect" data-i18n="lbl_days">Durasi Perjalanan (1–5 Hari)</label>
+                <select id="itinDaysSelect" class="select-field">
+                  <option value="1">1 Hari</option>
+                  <option value="2">2 Hari</option>
+                  <option value="3">3 Hari</option>
+                  <option value="4">4 Hari</option>
+                  <option value="5">5 Hari</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="itinTravelersInput" data-i18n="lbl_travelers">Jumlah Wisatawan</label>
+                <input type="number" id="itinTravelersInput" class="input-field tabular" min="1" max="30" />
+              </div>
+            </div>
+
+            <!-- Add Activity Form -->
+            <div style="background:var(--bg-tinted);padding:16px;border-radius:var(--radius-sm);border:1px solid var(--border-hairline);">
+              <p style="font-weight:600;font-size:0.88rem;margin:0 0 10px;" data-i18n="lbl_add_act">Tambah Aktivitas ke Jadwal</p>
+              <div class="form-grid-3" style="margin-bottom:10px;">
+                <div class="field-group">
+                  <label class="field-label" for="actDaySelect" data-i18n="lbl_day">Hari ke-</label>
+                  <select id="actDaySelect" class="select-field"></select>
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="actTimeSelect" data-i18n="lbl_time_slot">Waktu</label>
+                  <select id="actTimeSelect" class="select-field">
+                    <option value="Pagi">Pagi (08:00–11:30)</option>
+                    <option value="Siang">Siang (12:30–15:00)</option>
+                    <option value="Sore">Sore (15:30–18:00)</option>
+                    <option value="Malam">Malam (19:30–21:30)</option>
+                  </select>
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="actSourceSelect" data-i18n="lbl_source">Pilih dari Katalog</label>
+                  <select id="actSourceSelect" class="select-field"></select>
+                </div>
+              </div>
+              <div class="form-grid-3" style="align-items:end;">
+                <div class="field-group">
+                  <label class="field-label" for="actCustomTitle" data-i18n="lbl_act_name">Nama Aktivitas</label>
+                  <input type="text" id="actCustomTitle" class="input-field" placeholder="Contoh: Shalat Ashar &amp; Wisata..." />
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="actCustomCost" data-i18n="lbl_act_cost">Estimasi Biaya/Org (Rp)</label>
+                  <input type="number" id="actCustomCost" class="input-field tabular" min="0" step="5000" value="0" />
+                </div>
+                <button type="button" class="btn-primary" id="addActivityBtn" style="width:100%;" data-i18n="btn_add_act">+ Tambahkan</button>
+              </div>
+            </div>
+
+            <div id="itineraryDaysContainer"></div>
+          </div>
+
+          <!-- Budget Calculator Sidebar -->
+          <aside class="surface-box" aria-label="Kalkulator Estimasi Anggaran">
+            <h3 style="font-family:var(--font-display);font-size:1.45rem;margin:0 0 6px;" data-i18n="calc_heading">Kalkulator Estimasi Anggaran</h3>
+            <p class="meta-line" style="margin:0 0 18px;" data-i18n="calc_sub">Seluruh nominal adalah estimasi simulasi dan tersimpan otomatis di browser.</p>
+
+            <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:18px;">
+              <div class="field-group">
+                <label class="field-label" for="calcAccomInput" data-i18n="lbl_calc_accom">Estimasi Penginapan / Malam (Rp)</label>
+                <input type="number" id="calcAccomInput" class="input-field tabular" min="0" step="50000" />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="calcMealInput" data-i18n="lbl_calc_meal">Estimasi Kuliner / Orang / Hari (Rp)</label>
+                <input type="number" id="calcMealInput" class="input-field tabular" min="0" step="15000" />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="calcTransInput" data-i18n="lbl_calc_trans">Transportasi Lokal / Hari (Rp)</label>
+                <input type="number" id="calcTransInput" class="input-field tabular" min="0" step="25000" />
+              </div>
+            </div>
+
+            <div id="budgetBreakdown"></div>
+
+            <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;">
+              <button type="button" class="btn-secondary btn-sm" id="exportItineraryBtn" data-i18n="btn_export_itin">Unduh Ringkasan (.json)</button>
+              <button type="button" class="btn-secondary btn-sm" id="printItineraryBtn" data-i18n="btn_print_itin">Cetak Jadwal</button>
+            </div>
+          </aside>
+        </div>
+
+        <!-- Panel B: Rule-Based Package Recommendation -->
+        <div id="packagesPanel" style="display:none;">
+          <div class="filter-panel">
+            <div class="form-grid-3">
+              <div class="field-group">
+                <label class="field-label" for="recInterestSelect" data-i18n="rec_interest">Minat Utama Wisata</label>
+                <select id="recInterestSelect" class="select-field">
+                  <option value="all">Semua Minat</option>
+                  <option value="Religi">Religi &amp; Sejarah Islam</option>
+                  <option value="Bahari">Bahari &amp; Snorkeling</option>
+                  <option value="Alam">Alam &amp; Dataran Tinggi Gayo</option>
+                  <option value="Budaya">Budaya &amp; Kuliner Lokal</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="recDurationSelect" data-i18n="rec_duration">Preferensi Durasi</label>
+                <select id="recDurationSelect" class="select-field">
+                  <option value="all">Semua Durasi (1–5 Hari)</option>
+                  <option value="short">Singkat (1–2 Hari)</option>
+                  <option value="medium">Menengah (3 Hari)</option>
+                  <option value="long">Eksplorasi Lengkap (4–5 Hari)</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="recBudgetSelect" data-i18n="rec_budget">Batas Anggaran / Orang (Simulasi)</label>
+                <select id="recBudgetSelect" class="select-field">
+                  <option value="all">Semua Anggaran</option>
+                  <option value="1500000">Maksimal Rp 1.500.000</option>
+                  <option value="3000000">Maksimal Rp 3.000.000</option>
+                  <option value="5000000">Maksimal Rp 5.000.000</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div id="packagesResultGrid" class="pkg-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Dashboard Demo CRUD -->
+    <section id="kelola" class="section-block">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="editorial-kicker" data-i18n="crud_kicker">Panel Pengelola Demo</p>
+            <h2 class="section-title" data-i18n="crud_title">Dashboard Demo CRUD Data Pariwisata</h2>
+            <p class="section-subtitle" data-i18n="crud_subtitle">
+              Kelola data destinasi, kuliner halal/UMKM, akomodasi ramah Muslim, dan paket wisata secara langsung tanpa backend. Perubahan tersimpan di localStorage dan langsung memperbarui katalog serta peta.
+            </p>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button type="button" class="btn-primary btn-sm" id="crudAddBtn" data-i18n="crud_add_btn">+ Tambah Data</button>
+            <button type="button" class="btn-secondary btn-sm btn-danger" id="crudResetBtn" data-i18n="crud_reset_btn">Reset Data Contoh</button>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px;">
+          <div class="tabs-bar" style="margin-bottom:0;" role="tablist" aria-label="Pilih Entitas CRUD">
+            <button type="button" class="tab-btn active" data-entity="destinasi" data-i18n="ent_destinasi">Destinasi</button>
+            <button type="button" class="tab-btn" data-entity="kuliner" data-i18n="ent_kuliner">Kuliner &amp; UMKM</button>
+            <button type="button" class="tab-btn" data-entity="akomodasi" data-i18n="ent_akomodasi">Akomodasi</button>
+            <button type="button" class="tab-btn" data-entity="paket" data-i18n="ent_paket">Paket Wisata</button>
+          </div>
+          <input type="search" id="crudSearchInput" class="input-field" style="max-width:300px;" placeholder="Cari di tabel..." aria-label="Cari data di dashboard CRUD" />
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table" id="crudTable"></table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="brand-wordmark" style="color:#FFFFFF;margin:0 0 10px;">Pesona Explore Aceh</p>
+          <p style="margin:0;font-size:0.88rem;color:rgba(255,255,255,0.75);max-width:44ch;" data-i18n="footer_desc">
+            Prototipe aplikasi informasi pariwisata halal untuk wilayah Banda Aceh, Sabang, Aceh Besar, Aceh Tengah, dan Bener Meriah.
+          </p>
+        </div>
+        <div>
+          <p style="font-weight:600;margin:0 0 10px;color:#FFFFFF;" data-i18n="footer_regions">Cakupan Wilayah</p>
+          <p style="margin:0;font-size:0.86rem;line-height:1.8;color:rgba(255,255,255,0.75);">
+            Banda Aceh · Sabang · Aceh Besar · Aceh Tengah · Bener Meriah
+          </p>
+        </div>
+        <div>
+          <p style="font-weight:600;margin:0 0 10px;color:#FFFFFF;" data-i18n="footer_disclaimer_title">Keterangan Simulasi</p>
+          <p style="margin:0;font-size:0.84rem;line-height:1.6;color:rgba(255,255,255,0.75);" data-i18n="footer_disclaimer_body">
+            Seluruh tarif, kontak WhatsApp, dan contoh status sertifikasi halal bersifat data simulasi demonstrasi dan tidak menggantikan verifikasi resmi di lapangan.
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Pesona Explore Aceh — Prototype HTML5 / CSS3 / Vanilla JS</span>
+        <span data-i18n="footer_storage">Penyimpanan lokal aktif via browser localStorage</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Detail Modal -->
+  <div class="backdrop" id="detailModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="detailModalTitle">
+    <div class="modal-panel" id="detailModalContent"></div>
+  </div>
+
+  <!-- WhatsApp Demo Modal -->
+  <div class="backdrop" id="waModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="waModalTitle">
+    <div class="modal-panel" style="max-width:520px;" id="waModalContent"></div>
+  </div>
+
+  <!-- CRUD Form Modal -->
+  <div class="backdrop" id="crudModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="crudModalTitle">
+    <div class="modal-panel" style="max-width:620px;" id="crudModalContent"></div>
+  </div>
+
+  <!-- Favorites Slide-Over Drawer -->
+  <div class="drawer-backdrop" id="favDrawerBackdrop" role="dialog" aria-modal="true" aria-labelledby="favDrawerTitle">
+    <div class="drawer-panel">
+      <div class="modal-head" style="margin-bottom:4px;">
+        <div>
+          <h3 id="favDrawerTitle" style="font-family:var(--font-display);font-size:1.5rem;margin:0;" data-i18n="fav_drawer_title">Daftar Favorit Tersimpan</h3>
+          <p class="meta-line" style="margin:4px 0 0;" data-i18n="fav_drawer_sub">Tersimpan otomatis di localStorage browser Anda.</p>
+        </div>
+        <button type="button" class="close-btn" id="closeFavBtn" aria-label="Tutup panel favorit">&times;</button>
+      </div>
+      <div id="favDrawerList" style="display:flex;flex-direction:column;gap:12px;"></div>
+    </div>
+  </div>
+
+  <div class="toast-banner" id="toastBanner" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* =========================================================================
+       * 1. BILINGUAL DICTIONARY (ID & EN)
+       * ========================================================================= */
+      const I18N = {
+        id: {
+          nav_destinasi: 'Destinasi',
+          nav_peta: 'Peta & Wilayah',
+          nav_kuliner: 'Kuliner & Akomodasi',
+          nav_rencana: 'Rencana & Paket',
+          nav_crud: 'Kelola Data',
+          nav_cta: 'Rencanakan Trip',
+          utility_notice: 'Prototipe Pariwisata Halal Aceh · Harga & kontak adalah data simulasi · Fasilitas ramah Muslim dibedakan dari sertifikasi halal resmi.',
+          hero_kicker: 'Serambi Mekkah · Banda Aceh · Sabang · Gayo',
+          hero_title: 'Jelajahi Warisan Islam, Bahari, dan Dataran Tinggi Aceh',
+          hero_desc: 'Panduan wisata ramah Muslim untuk menemukan destinasi religi, terumbu karang Sabang, perkebunan kopi Gayo, kuliner lokal, dan penginapan nyaman lengkap dengan informasi fasilitas ibadah serta perencana perjalanan 1–5 hari.',
+          hero_cta_primary: 'Jelajahi Destinasi',
+          hero_cta_secondary: 'Susun Itinerary & Anggaran',
+          hero_fig_title: 'Masjid Raya Baiturrahman, Banda Aceh',
+          hero_fig_sub: 'Ikon wisata religi dan sejarah peradaban Islam Nusantara.',
+          pillar_1_t: '01. Lima Wilayah Aceh',
+          pillar_1_d: 'Banda Aceh, Sabang, Aceh Besar, Aceh Tengah, dan Bener Meriah dalam satu katalog.',
+          pillar_2_t: '02. Fasilitas Ibadah Jelas',
+          pillar_2_d: 'Setiap destinasi memuat rincian mushalla, tempat wudhu, dan keterangan verifikasi lokasi.',
+          pillar_3_t: '03. Transparansi Status Halal',
+          pillar_3_d: 'Membedakan sertifikasi halal resmi beserta sumbernya dari klaim ramah Muslim.',
+          pillar_4_t: '04. Itinerary 1–5 Hari',
+          pillar_4_d: 'Kalkulator anggaran simulasi & rekomendasi paket berbasis minat tersimpan di browser.',
+          dest_kicker: 'Katalog Kurasi',
+          dest_title: 'Destinasi Wisata Halal & Budaya Aceh',
+          dest_subtitle: 'Temukan destinasi religi, alam, bahari, sejarah, budaya, dan sentra kuliner. Informasi yang belum terverifikasi lapangan ditandai secara transparan.',
+          search_ph: 'Cari destinasi, lokasi, atau fasilitas ibadah...',
+          sort_featured: 'Urutan: Unggulan',
+          sort_cost_asc: 'Biaya Terendah (Simulasi)',
+          sort_cost_desc: 'Biaya Tertinggi (Simulasi)',
+          sort_name_asc: 'Nama A–Z',
+          all_regions: 'Semua Wilayah',
+          all_categories: 'Semua Kategori',
+          map_kicker: 'Geografi Wisata Aceh',
+          map_title: 'Peta Ilustratif Wilayah & Akses Google Maps',
+          map_subtitle: 'Pilih titik wilayah atau pin destinasi pada peta vektor ilustratif untuk memeriksa lokasi, fasilitas ibadah, dan membuka tautan Google Maps langsung tanpa API key.',
+          ka_kicker: 'UMKM & Hospitalitas',
+          ka_title: 'Kuliner Halal, Produk UMKM & Akomodasi Ramah Muslim',
+          ka_subtitle: 'Telusuri ragam kuliner autentik dan penginapan nyaman di Aceh lengkap dengan kejelasan status verifikasi sertifikat halal serta kontak WhatsApp mode demo.',
+          halal_transparency_note: '<strong>Catatan Kepatuhan &amp; Verifikasi:</strong> Aplikasi membedakan secara tegas antara <strong>Status Sertifikasi Halal Resmi</strong> (produk kuliner/UMKM yang merujuk sumber verifikasi BPJPH/MPU contoh atau ditandai belum bersertifikat) dengan <strong>Fasilitas Ramah Muslim</strong> pada akomodasi (arah kiblat, perlengkapan shalat, lingkungan bebas alkohol). Tarif dan nomor kontak WhatsApp adalah data simulasi.',
+          tab_kuliner: 'Kuliner Halal & UMKM',
+          tab_akomodasi: 'Akomodasi Ramah Muslim',
+          plan_kicker: 'Perencanaan Perjalanan',
+          plan_title: 'Rekomendasi Paket Wisata & Itinerary Planner (1–5 Hari)',
+          plan_subtitle: 'Gunakan penyaring berbasis aturan (rule-based filtering) untuk menemukan paket wisata sesuai minat dan anggaran, atau susun jadwal harian sendiri dengan kalkulator biaya otomatis.',
+          tab_itinerary: 'Itinerary Planner & Kalkulator',
+          tab_packages: 'Rekomendasi Paket (Rule-Based)',
+          itin_heading: 'Penyusun Rencana Perjalanan',
+          btn_new_itin: '+ Baru',
+          btn_del_itin: 'Hapus',
+          lbl_trip_name: 'Nama Perjalanan',
+          lbl_start_date: 'Tanggal Mulai',
+          lbl_days: 'Durasi Perjalanan (1–5 Hari)',
+          lbl_travelers: 'Jumlah Wisatawan',
+          lbl_add_act: 'Tambah Aktivitas ke Jadwal',
+          lbl_day: 'Hari ke-',
+          lbl_time_slot: 'Waktu',
+          lbl_source: 'Pilih dari Katalog',
+          lbl_act_name: 'Nama Aktivitas',
+          lbl_act_cost: 'Estimasi Biaya/Org (Rp)',
+          btn_add_act: '+ Tambahkan',
+          calc_heading: 'Kalkulator Estimasi Anggaran',
+          calc_sub: 'Seluruh nominal adalah estimasi simulasi dan tersimpan otomatis di browser.',
+          lbl_calc_accom: 'Estimasi Penginapan / Malam (Rp)',
+          lbl_calc_meal: 'Estimasi Kuliner / Orang / Hari (Rp)',
+          lbl_calc_trans: 'Transportasi Lokal / Hari (Rp)',
+          btn_export_itin: 'Unduh Ringkasan (.json)',
+          btn_print_itin: 'Cetak Jadwal',
+          rec_interest: 'Minat Utama Wisata',
+          rec_duration: 'Preferensi Durasi',
+          rec_budget: 'Batas Anggaran / Orang (Simulasi)',
+          crud_kicker: 'Panel Pengelola Demo',
+          crud_title: 'Dashboard Demo CRUD Data Pariwisata',
+          crud_subtitle: 'Kelola data destinasi, kuliner halal/UMKM, akomodasi ramah Muslim, dan paket wisata secara langsung tanpa backend. Perubahan tersimpan di localStorage dan langsung memperbarui katalog serta peta.',
+          crud_add_btn: '+ Tambah Data',
+          crud_reset_btn: 'Reset Data Contoh',
+          ent_destinasi: 'Destinasi',
+          ent_kuliner: 'Kuliner & UMKM',
+          ent_akomodasi: 'Akomodasi',
+          ent_paket: 'Paket Wisata',
+          footer_desc: 'Prototipe aplikasi informasi pariwisata halal untuk wilayah Banda Aceh, Sabang, Aceh Besar, Aceh Tengah, dan Bener Meriah.',
+          footer_regions: 'Cakupan Wilayah',
+          footer_disclaimer_title: 'Keterangan Simulasi',
+          footer_disclaimer_body: 'Seluruh tarif, kontak WhatsApp, dan contoh status sertifikasi halal bersifat data simulasi demonstrasi dan tidak menggantikan verifikasi resmi di lapangan.',
+          footer_storage: 'Penyimpanan lokal aktif via browser localStorage',
+          fav_drawer_title: 'Daftar Favorit Tersimpan',
+          fav_drawer_sub: 'Tersimpan otomatis di localStorage browser Anda.',
+          detail_btn: 'Detail & Ibadah',
+          add_itin_btn: '+ Itinerary',
+          wa_demo_btn: 'WhatsApp (Demo)',
+          open_maps_btn: 'Buka Google Maps',
+          apply_pkg_btn: 'Terapkan ke Itinerary',
+          free_label: 'Gratis / Sukarela',
+          sim_tag: 'Estimasi Simulasi'
+        },
+        en: {
+          nav_destinasi: 'Destinations',
+          nav_peta: 'Map & Regions',
+          nav_kuliner: 'Culinary & Stays',
+          nav_rencana: 'Planner & Packages',
+          nav_crud: 'Manage Data',
+          nav_cta: 'Plan Trip',
+          utility_notice: 'Aceh Halal Tourism Prototype · Prices & contacts are simulated · Muslim-friendly hospitality is distinguished from official halal certification.',
+          hero_kicker: 'Veranda of Mecca · Banda Aceh · Sabang · Gayo',
+          hero_title: 'Explore Islamic Heritage, Coral Seas, and Aceh Highlands',
+          hero_desc: 'A Muslim-friendly travel guide to discover religious landmarks, Sabang reefs, Gayo coffee highlands, local halal cuisine, and comfortable stays with clear worship facilities and a 1–5 day trip planner.',
+          hero_cta_primary: 'Explore Destinations',
+          hero_cta_secondary: 'Build Itinerary & Budget',
+          hero_fig_title: 'Baiturrahman Grand Mosque, Banda Aceh',
+          hero_fig_sub: 'Icon of spiritual heritage and Islamic civilization in Nusantara.',
+          pillar_1_t: '01. Five Aceh Regions',
+          pillar_1_d: 'Banda Aceh, Sabang, Aceh Besar, Aceh Tengah, and Bener Meriah in one curated catalog.',
+          pillar_2_t: '02. Clear Worship Info',
+          pillar_2_d: 'Every destination lists prayer rooms, ablution areas, and field verification notes.',
+          pillar_3_t: '03. Halal Status Clarity',
+          pillar_3_d: 'Separates official halal certification with source records from Muslim-friendly claims.',
+          pillar_4_t: '04. 1–5 Day Planner',
+          pillar_4_d: 'Simulated budget calculator & rule-based package recommendations saved in browser.',
+          dest_kicker: 'Curated Catalog',
+          dest_title: 'Aceh Halal & Cultural Destinations',
+          dest_subtitle: 'Discover religious, nature, marine, historical, cultural, and culinary spots. Unverified field details are marked transparently.',
+          search_ph: 'Search destinations, addresses, or prayer facilities...',
+          sort_featured: 'Sort: Featured',
+          sort_cost_asc: 'Lowest Cost (Simulated)',
+          sort_cost_desc: 'Highest Cost (Simulated)',
+          sort_name_asc: 'Name A–Z',
+          all_regions: 'All Regions',
+          all_categories: 'All Categories',
+          map_kicker: 'Aceh Travel Geography',
+          map_title: 'Illustrative Regional Map & Google Maps Links',
+          map_subtitle: 'Select any region or destination pin on the vector map to inspect worship facilities and open Google Maps directly without an API key.',
+          ka_kicker: 'SMEs & Hospitality',
+          ka_title: 'Halal Culinary, Local SMEs & Muslim-Friendly Stays',
+          ka_subtitle: 'Browse authentic Acehnese cuisine and comfortable stays with transparent halal verification status and demo WhatsApp contacts.',
+          halal_transparency_note: '<strong>Compliance &amp; Verification Notice:</strong> This application clearly separates <strong>Official Halal Certification Status</strong> (culinary/SME products referencing sample BPJPH/MPU sources or marked uncertified) from <strong>Muslim-Friendly Hospitality Facilities</strong> in accommodations (Qibla direction, prayer mats, alcohol-free policy). Prices and WhatsApp numbers are simulated.',
+          tab_kuliner: 'Halal Culinary & SMEs',
+          tab_akomodasi: 'Muslim-Friendly Stays',
+          plan_kicker: 'Trip Planning',
+          plan_title: 'Package Recommendations & 1–5 Day Itinerary Planner',
+          plan_subtitle: 'Use rule-based filtering to match travel packages with your interests and budget, or build a custom daily schedule with an automatic cost calculator.',
+          tab_itinerary: 'Itinerary & Budget Calculator',
+          tab_packages: 'Package Finder (Rule-Based)',
+          itin_heading: 'Day-by-Day Trip Planner',
+          btn_new_itin: '+ New',
+          btn_del_itin: 'Delete',
+          lbl_trip_name: 'Trip Name',
+          lbl_start_date: 'Start Date',
+          lbl_days: 'Duration (1–5 Days)',
+          lbl_travelers: 'Travelers',
+          lbl_add_act: 'Add Activity to Schedule',
+          lbl_day: 'Day',
+          lbl_time_slot: 'Time Slot',
+          lbl_source: 'Pick from Catalog',
+          lbl_act_name: 'Activity Title',
+          lbl_act_cost: 'Est. Cost/Person (IDR)',
+          btn_add_act: '+ Add Activity',
+          calc_heading: 'Trip Budget Calculator',
+          calc_sub: 'All figures are simulated estimates saved automatically in your browser.',
+          lbl_calc_accom: 'Est. Stay / Night (IDR)',
+          lbl_calc_meal: 'Est. Meals / Person / Day (IDR)',
+          lbl_calc_trans: 'Local Transport / Day (IDR)',
+          btn_export_itin: 'Download Summary (.json)',
+          btn_print_itin: 'Print Schedule',
+          rec_interest: 'Primary Interest',
+          rec_duration: 'Preferred Duration',
+          rec_budget: 'Max Budget / Person (Simulated)',
+          crud_kicker: 'Demo Management Console',
+          crud_title: 'CRUD Demo Dashboard for Tourism Data',
+          crud_subtitle: 'Create, edit, or delete destinations, halal culinary/SMEs, accommodations, and travel packages directly without a backend. Changes persist in localStorage and update the catalog and map live.',
+          crud_add_btn: '+ Add Record',
+          crud_reset_btn: 'Reset Sample Data',
+          ent_destinasi: 'Destinations',
+          ent_kuliner: 'Culinary & SMEs',
+          ent_akomodasi: 'Accommodations',
+          ent_paket: 'Packages',
+          footer_desc: 'Halal tourism information prototype covering Banda Aceh, Sabang, Aceh Besar, Aceh Tengah, and Bener Meriah.',
+          footer_regions: 'Coverage Regions',
+          footer_disclaimer_title: 'Simulation Notice',
+          footer_disclaimer_body: 'All rates, WhatsApp contacts, and sample halal certification records are simulation data for demonstration and do not replace official field verification.',
+          footer_storage: 'Local persistence active via browser localStorage',
+          fav_drawer_title: 'Saved Favorites',
+          fav_drawer_sub: 'Persisted automatically in your browser localStorage.',
+          detail_btn: 'Details & Worship',
+          add_itin_btn: '+ Itinerary',
+          wa_demo_btn: 'WhatsApp (Demo)',
+          open_maps_btn: 'Open Google Maps',
+          apply_pkg_btn: 'Apply to Itinerary',
+          free_label: 'Free / Voluntary',
+          sim_tag: 'Simulated Estimate'
+        }
+      };
+
+      const REGIONS = ['Banda Aceh', 'Sabang', 'Aceh Besar', 'Aceh Tengah', 'Bener Meriah'];
+      const CATEGORIES = ['Religi', 'Alam', 'Bahari', 'Sejarah', 'Budaya', 'Kuliner'];
+      const CAT_LABELS_EN = {
+        Religi: 'Religious',
+        Alam: 'Nature',
+        Bahari: 'Marine',
+        Sejarah: 'Heritage',
+        Budaya: 'Culture',
+        Kuliner: 'Culinary'
+      };
+
+      /* =========================================================================
+       * 2. SEED DATA (15 Destinasi, 8 Kuliner, 6 Akomodasi, 5 PaketWisata)
+       * ========================================================================= */
+      const IMG_MOSQUE = '/src/assets/images/hero_baiturrahman_aceh_1795590347260.jpg';
+      const IMG_SABANG = '/src/assets/images/dest_sabang_iboih_1795590348157.jpg';
+      const IMG_GAYO = '/src/assets/images/dest_gayo_takengon_1795590348598.jpg';
+      const IMG_KULINER = '/src/assets/images/kuliner_mie_aceh_1795590349813.jpg';
+      const IMG_RESORT = '/src/assets/images/akomodasi_aceh_resort_1795590350276.jpg';
+
+      const SEED_DATA = {
+        destinasi: [
+          {
+            id: 'dest-baiturrahman',
+            nama: 'Masjid Raya Baiturrahman',
+            kategori: 'Religi',
+            wilayah: 'Banda Aceh',
+            deskripsi: {
+              id: 'Masjid bersejarah kebanggaan masyarakat Aceh dengan kubah hitam megah, payung pelataran modern, dan kolam pantul tenang di pusat kota Banda Aceh.',
+              en: 'Historic landmark mosque of Aceh featuring iconic black domes, shaded courtyard canopies, and serene reflecting pools in central Banda Aceh.'
+            },
+            imageUrl: IMG_MOSQUE,
+            alamat: 'Jl. Moh. Jam No.1, Kp. Baru, Kec. Baiturrahman, Kota Banda Aceh',
+            mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Masjid+Raya+Baiturrahman+Banda+Aceh',
+            estimasiBiaya: 0,
+            fasilitas: ['Area parkir luas', 'Pelataran teduh berpayung', 'Pemandu informasi sejarah', 'Akses kursi roda'],
+            fasilitasIbadah: ['Ruang shalat utama berkapasitas besar', 'Tempat wudhu terpisah pria & wanita', 'Tersedia mukena & sarung bersih', 'Penunjuk arah kiblat jelas'],
+            unggulan: true,
+            statusVerifikasiInfo: 'Terverifikasi Dasar',
+            mapCoords: { x: 205, y: 196 }
+          },
+          {
+            id: 'dest-tsunami',
+            nama: 'Museum Tsunami Aceh',
+            kategori: 'Sejarah',
+            wilayah: 'Banda Aceh',
+            deskripsi: {
+              id: 'Monumen edukasi dan ruang refleksi bencana 2004 dengan arsitektur bermakna simbolis kapal penyelamat serta lorong cahaya pengingat ketangguhan warga Aceh.',
+              en: 'Educational memorial and reflection space commemorating the 2004 tsunami through symbolic rescue-ship architecture and contemplative galleries.'
+            },
+            imageUrl: IMG_MOSQUE,
+            alamat: 'Jl. Sultan Iskandar Muda No.3, Sukaramai, Banda Aceh',
+            mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Museum+Tsunami+Aceh+Banda+Aceh',
+            estimasiBiaya: 10000,
+            fasilitas: ['Galeri pameran tematik', 'Ruang audiovisual', 'Toko suvenir edukasi', 'Toilet & akses disabilitas'],
+            fasilitasIbadah: ['Mushalla di area gedung', 'Tempat wudhu terpisah', 'Dekat dengan Masjid Raya Baiturrahman (400m)'],
+            unggulan: true,
+            statusVerifikasiInfo: 'Terverifikasi Dasar',
+            mapCoords: { x: 222, y: 214 }
+          },
+          {
+            id: 'dest-pltd-apung',
+            nama: 'Situs Kapal PLTD Apung & Kampung Wisata',
+            kategori: 'Sejarah',
+            wilayah: 'Banda Aceh',
+            deskripsi: {
+              id: 'Kapal pembangkit listrik berbobot ribuan ton yang menjadi saksi bisu sejarah 2004, dilengkapi taman edukasi dan gerai suvenir warga setempat.',
+              en: 'Historic floating power plant vessel preserved as an educational heritage park with community craft stalls in Punge Blang Cut.'
+            },
+            imageUrl: IMG_RESORT,
+            alamat: 'Punge Blang Cut, Kec. Jaya Baru, Kota Banda Aceh',
+            mapsUrl: 'https://www.google.com/maps/search/?api=1&query=PLTD+Apung+Banda+Aceh',
+            estimasiBiaya: 5000,
+            fasilitas: ['Anjungan pandang atas kapal', 'Area informasi sejarah', 'Parkir & kios minuman halal'],
+            fasilitasIbadah: ['Mushalla kecil di kompleks taman', 'Tempat wudhu tersedia (periksa jam buka lokal)'],
+            unggulan: false,
+            statusVerifikasiInfo: 'Belum Diverifikasi Lapangan',
+            mapCoords: { x: 188, y: 214 }
+          },
+          {
+            id: 'dest-peunayong-kuliner',
+            nama: 'Koridor Kuliner Halal Peunayong & Simpang Lima',
+            kategori: 'Kuliner',
+            wilayah: 'Banda Aceh',
+            deskripsi: {
+              id: 'Pusat sajian malam dan pagi khas Banda Aceh mulai dari Mie Aceh, Kopi Sanger tarik, hingga kudapan tradisional yang ramai dikunjungi keluarga.',
+              en: 'Lively Banda Aceh culinary corridor offering signature Mie Aceh, pulled Sanger coffee, and traditional family-friendly evening dishes.'
+            },
+            imageUrl: IMG_KULINER,
+            alamat: 'Kawasan Peunayong & Simpang Lima, Kota Banda Aceh',
+            mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Peunayong+Banda+Aceh',
+            estimasiBiaya: 35000,
+            fasilitas: ['Puluhan kedai kuliner lokal', 'Area duduk keluarga', 'Dekat pusat oleh-oleh'],
+            fasilitasIbadah: ['Akses mudah ke masjid sekitar kawasan', 'Sebagian kedai memiliki mushalla kecil'],
+            unggulan: false,
+            statusVerifikasiInfo: 'Belum Diverifikasi Lapangan',
+            mapCoords: { x: 235, y: 194 }
+          },
+          {
+            id: 'dest-iboih-rubiah',
+            nama: 'Pantai Iboih & Taman Laut Pulau Rubiah',
+            kategori: 'Bahari',
+            wilayah: 'Sabang',
+            deskripsi: {
+              id: 'Laguna air jernih berwarna pirus di ujung barat Indonesia dengan taman terumbu karang yang ramah untuk snorkeling keluarga serta perahu kaca.',
+              en: 'Crystal-clear turquoise lagoon at Indonesia’s westernmost island featuring vibrant coral gardens ideal for family snorkeling and glass-bottom boats.'
+            },
+            imageUrl: IMG_SABANG,
+            alamat: 'Desa Iboih, Kec. Sukakarya, Kota Sabang (Pulau Weh)',
+            mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Pantai+Iboih+Sabang',
+            estimasiBiaya: 50000,
+            fasilitas: ['Dermaga perahu penyeberangan', 'Penyewaan alat snorkeling', 'Pemandu laut lokal', 'Warung makan seafood halal'],
+            fasilitasIbadah: ['Mushalla di area pantai Iboih', 'Tempat bilas & wudhu terpisah (kondisi dasar)'],
+            unggulan: true,
+            statusVerifikasiInfo: 'Terverifikasi Dasar',
+            mapCoords: { x: 148, y: 88 }
+          },
+          {
+            id: 'dest-km-nol',
+            nama: 'Tugu Kilometer Nol Indonesia',
+            kategori: 'Alam',
+            wilayah: 'Sabang',
+            deskripsi: {
+              id: 'Titik geografis paling barat Nusantara di tebing hutan lindung Pulau Weh dengan panorama Samudra Hindia dan matahari terbenam yang memukau.',
+              en: 'The westernmost geographical monument of Indonesia perched on forested cliffs overlooking the Indian Ocean.'
+            },
+            imageUrl: IMG_SABANG,
+            alamat: 'Iboih, Kec. Sukakarya, Kota Sabang',
+            mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Tugu+Kilometer+Nol+Sabang',
+            estimasiBiaya: 15000,
+            fasilitas: ['Menara pandang samudra', 'Area parkir kendaraan', 'Kios oleh-oleh UMKM Sabang'],
+            fasilitasIbadah: ['Mushalla di sekitar area pelataran parkir', 'Fasilitas wudhu sederhana'],
+            unggulan: true,
+            statusVerifikasiInfo: 'Terverifikasi Dasar',
+            mapCoords: { x: 122, y: 76 }
+          },
+          {
+            id: 'dest-anoeitam',
+            nama: 'Benteng Anoi Itam & Pesisir Timur Sabang',
+            kategori: 'Sejarah',
+            wilayah: 'Sabang',
+            deskripsi: {
+              id: 'Peninggalan bunker pertahanan bersejarah di atas tebing batu hitam vulkanik dengan pemandangan selat dan kebun kelapa pesisir.',
+              en: 'Historic coastal fortification overlooking volcanic black-sand cliffs and sweeping Sabang strait vistas.'
+            },
+            imageUrl: IMG_SABANG,
+            alamat: 'Gampong Anoi Itam, Kec. Sukajaya, Kota Sabang',
+            mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Benteng+Anoi+Itam+Sabang',
+            estimasiBiaya: 10000,
+            fasilitas: ['Tangga akses tebing', 'Gazebo istirahat', 'Area foto panorama'],
+            fasilitasIbadah: ['Mushalla berada di perkampungan terdekat (~1 km)', 'Disarankan membawa perlengkapan shalat portabel'],
+            unggulan: false,
+            statusVerifikasiInfo: 'Belum Diverifikasi Lapangan',
+            mapCoords: { x: 178, y: 112 }
+          },
+          {
+            id: 'dest-lampuuk',
+            nama: 'Pantai Lampuuk & Masjid Rahmatullah',
+            kategori: 'Bahari',
+            wilayah: 'Aceh Besar',
+            deskripsi: {
+              id: 'Hamparan pasir putih sepanjang pesisir barat Aceh Besar yang berdampingan dengan Masjid Rahmatullah, ikon keteguhan iman masyarakat Lhoknga.',
+              en: 'Sweeping white-sand coastline in Aceh Besar paired with Masjid Rahmatullah, a beloved symbol of resilience in Lhoknga.'
+            },
+            imageUrl: IMG_SABANG,
+            alamat: 'Meunasah Masjid, Kec. Lhoknga, Kab. Aceh Besar',
+            mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Pantai+Lampuuk+Aceh+Besar',
+            estimasiBiaya: 15000,
+            fasilitas: ['Gazebo keluarga di tepi pantai', 'Pondok ikan bakar lokal', 'Area parkir luas'],
+            fasilitasIbadah: ['Masjid Rahmatullah berjarak dekat dari pesisir', 'Mushalla pantai & tempat wudhu terpisah'],
+            unggulan: true,
+            statusVerifikasiInfo: 'Terverifikasi Dasar',
+            mapCoords: { x: 228, y: 266 }
+          },
+          {
+            id: 'dest-suhom',
+            nama: 'Air Terjun Suhom & Lembah Lhoong',
+            kategori: 'Alam',
+            wilayah: 'Aceh Besar',
+            deskripsi: {
+              id: 'Air terjun bertingkat di kaki perbukitan hijau Aceh Besar dengan udara sejuk dan suasana alam asri untuk rekreasi keluarga.',
+              en: 'Tiered mountain waterfall nestled in lush Aceh Besar hills offering cool breezes and tranquil family picnic spots.'
+            },
+            imageUrl: IMG_GAYO,
+            alamat: 'Desa Suhom, Kec. Lhoong, Kab. Aceh Besar',
+            mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Air+Terjun+Suhom+Aceh+Besar',
+            estimasiBiaya: 10000,
+            fasilitas: ['Jalur jalan kaki tertata', 'Saung istirahat', 'Warung minuman lokal'],
+            fasilitasIbadah: ['Mushalla sederhana di pintu masuk wisata', 'Air bersih alami & area wudhu'],
+            unggulan: false,
+            statusVerifikasiInfo: 'Belum Diverifikasi Lapangan',
+            mapCoords: { x: 256, y: 302 }
+          },
+          {
+            id: 'dest-rumoh-aceh',
+            nama: 'Kampung Adat Rumoh Aceh & Sentra Songket',
+            kategori: 'Budaya',
+            wilayah: 'Aceh Besar',
+            deskripsi: {
+              id: 'Pelestarian arsitektur rumah panggung tradisional Aceh bermotif ukiran khas serta bengkel tenun benang emas (kasab) milik pengrajin lokal.',
+              en: 'Preserved traditional Acehnese stilt-house heritage paired with local gold-thread kasab weaving workshops.'
+            },
+            imageUrl: IMG_RESORT,
+            alamat: 'Kec. Ingin Jaya / Darul Imarah, Kab. Aceh Besar (Lokasi Simulasi)',
+            mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Rumoh+Aceh+Aceh+Besar',
+            estimasiBiaya: 20000,
+            fasilitas: ['Tur edukasi arsitektur', 'Galeri tenun UMKM', 'Ruang ramah keluarga'],
+            fasilitasIbadah: ['Meunasah/mushalla komunitas tersedia', 'Sajadah & arah kiblat terpasang'],
+            unggulan: false,
+            statusVerifikasiInfo: 'Belum Diverifikasi Lapangan',
+            mapCoords: { x: 298, y: 256 }
+          },
+          {
+            id: 'dest-laut-tawar',
+            nama: 'Danau Laut Tawar & Puncak Pantan Terong',
+            kategori: 'Alam',
+            wilayah: 'Aceh Tengah',
+            deskripsi: {
+              id: 'Danau tektonik luas di jantung dataran tinggi Gayo yang diselimuti kabut pagi serta bukit pandang Pantan Terong di ketinggian Takengon.',
+              en: 'Expansive highland lake in the Gayo mountains framed by morning mist and the panoramic Pantan Terong viewpoint.'
+            },
+            imageUrl: IMG_GAYO,
+            alamat: 'Takengon & Bebesen, Kab. Aceh Tengah',
+            mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Danau+Laut+Tawar+Takengon+Aceh+Tengah',
+            estimasiBiaya: 15000,
+            fasilitas: ['Gardu pandang pegunungan', 'Kedai seduh kopi Gayo', 'Area parkir'],
+            fasilitasIbadah: ['Mushalla di kawasan puncak & tepian danau', 'Tempat wudhu berair sejuk pegunungan'],
+            unggulan: true,
+            statusVerifikasiInfo: 'Terverifikasi Dasar',
+            mapCoords: { x: 545, y: 392 }
+          },
+          {
+            id: 'dest-kampung-gayo',
+            nama: 'Kampung Wisata Kopi Arabika Gayo & Tari Guel',
+            kategori: 'Budaya',
+            wilayah: 'Aceh Tengah',
+            deskripsi: {
+              id: 'Pengalaman edukasi petik dan sangrai kopi Arabika Gayo bersama petani lokal, disertai pengenalan seni tradisi Tari Guel dan kerawang Gayo.',
+              en: 'Interactive Arabica coffee harvesting and roasting experience with Gayo farmers alongside traditional Guel dance heritage.'
+            },
+            imageUrl: IMG_GAYO,
+            alamat: 'Kec. Kebayakan, Takengon, Kab. Aceh Tengah',
+            mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Kebun+Kopi+Gayo+Takengon',
+            estimasiBiaya: 40000,
+            fasilitas: ['Tur kebun kopi organik', 'Sesi cupping kopi halal', 'Galeri motif Kerawang Gayo'],
+            fasilitasIbadah: ['Mushalla nyaman di balai tamu kampung kopi', 'Perlengkapan shalat bersih tersedia'],
+            unggulan: false,
+            statusVerifikasiInfo: 'Belum Diverifikasi Lapangan',
+            mapCoords: { x: 486, y: 382 }
+          },
+          {
+            id: 'dest-pasar-paya-ilang',
+            nama: 'Sentra Kuliner Masam Jing & Kopi Takengon',
+            kategori: 'Kuliner',
+            wilayah: 'Aceh Tengah',
+            deskripsi: {
+              id: 'Kawasan kuliner dataran tinggi untuk mencicipi ikan depik danau, kuah masam jing khas Gayo, serta aneka olahan kopi sangrai segar.',
+              en: 'Highland culinary hub known for Lake Laut Tawar depik fish, tangy masam jing broth, and freshly roasted Gayo coffee.'
+            },
+            imageUrl: IMG_KULINER,
+            alamat: 'Pusat Kota Takengon, Kab. Aceh Tengah',
+            mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Takengon+Aceh+Tengah',
+            estimasiBiaya: 45000,
+            fasilitas: ['Rumah makan keluarga', 'Gerai oleh-oleh kopi UMKM', 'Parkir kota'],
+            fasilitasIbadah: ['Masjid Agung Ruhama berjarak dekat', 'Beberapa rumah makan memiliki mushalla'],
+            unggulan: false,
+            statusVerifikasiInfo: 'Belum Diverifikasi Lapangan',
+            mapCoords: { x: 515, y: 416 }
+          },
+          {
+            id: 'dest-burni-telong',
+            nama: 'Kawasan Gunung Burni Telong & Agrowisata Kopi',
+            kategori: 'Alam',
+            wilayah: 'Bener Meriah',
+            deskripsi: {
+              id: 'Panorama gunung berapi aktif yang asri di dataran tinggi Bener Meriah, dikelilingi kebun kopi arabika, jeruk keprok Gayo, dan udara pegunungan.',
+              en: 'Scenic volcanic highland landscape in Bener Meriah surrounded by Arabica coffee estates and cool mountain air.'
+            },
+            imageUrl: IMG_GAYO,
+            alamat: 'Desa Rembune / Wih Pesam, Kab. Bener Meriah',
+            mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Gunung+Burni+Telong+Bener+Meriah',
+            estimasiBiaya: 20000,
+            fasilitas: ['Pos registrasi pendakian', 'Area berkemah ramah keluarga', 'Kios petani kopi lokal'],
+            fasilitasIbadah: ['Mushalla di pos awal pendakian', 'Wudhu air pegunungan (bawa jaket/alas shalat)'],
+            unggulan: true,
+            statusVerifikasiInfo: 'Terverifikasi Dasar',
+            mapCoords: { x: 472, y: 298 }
+          },
+          {
+            id: 'dest-simpang-balik',
+            nama: 'Masjid Agung Babussalam & Air Panas Simpang Balik',
+            kategori: 'Religi',
+            wilayah: 'Bener Meriah',
+            deskripsi: {
+              id: 'Kombinasi wisata religi di Masjid Agung kebanggaan Simpang Tiga Redelong dengan rekreasi pemandian air panas alami di lereng pegunungan.',
+              en: 'A combined spiritual stop at Babussalam Grand Mosque in Redelong and natural mountain hot-spring relaxation in Simpang Balik.'
+            },
+            imageUrl: IMG_MOSQUE,
+            alamat: 'Redelong & Wih Pesam, Kab. Bener Meriah',
+            mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Masjid+Agung+Babussalam+Bener+Meriah',
+            estimasiBiaya: 10000,
+            fasilitas: ['Masjid luas dengan taman', 'Kolam air panas keluarga', 'Area parkir'],
+            fasilitasIbadah: ['Ruang shalat utama luas & bersih', 'Tempat wudhu terpisah pria/wanita & mukena tersedia'],
+            unggulan: false,
+            statusVerifikasiInfo: 'Belum Diverifikasi Lapangan',
+            mapCoords: { x: 522, y: 310 }
+          }
+        ],
+
+        kuliner: [
+          {
+            id: 'kul-mie-aceh',
+            nama: 'Mie Aceh Udang & Kepiting Rempah',
+            kategori: 'Hidangan Utama',
+            wilayah: 'Banda Aceh',
+            harga: 38000,
+            imageUrl: IMG_KULINER,
+            statusSertifikasiHalal: 'Tersertifikasi Halal Resmi (Contoh Data)',
+            sumberVerifikasi: 'Nomor Contoh: LPPOM-MPU-AC-SIM-01 (Simulasi Demo)',
+            kontak: '+62 812-0000-0101'
+          },
+          {
+            id: 'kul-sanger',
+            nama: 'Kopi Sanger Tarik & Kopi Khop UMKM',
+            kategori: 'Kopi & Minuman',
+            wilayah: 'Banda Aceh',
+            harga: 18000,
+            imageUrl: IMG_KULINER,
+            statusSertifikasiHalal: 'Klaim Mandiri / Dalam Verifikasi',
+            sumberVerifikasi: 'Pernyataan bahan halal mandiri pelaku UMKM (Belum ada sertifikat BPJPH)',
+            kontak: '+62 812-0000-0102'
+          },
+          {
+            id: 'kul-keumamah',
+            nama: 'Ikan Kayu Keumamah Kemasan Oleh-Oleh',
+            kategori: 'Kue & Oleh-Oleh UMKM',
+            wilayah: 'Sabang',
+            harga: 55000,
+            imageUrl: IMG_KULINER,
+            statusSertifikasiHalal: 'Tersertifikasi Halal Resmi (Contoh Data)',
+            sumberVerifikasi: 'Nomor Contoh: BPJPH-ID11-SIM-04 (Simulasi Demo)',
+            kontak: '+62 812-0000-0103'
+          },
+          {
+            id: 'kul-sate-gurita',
+            nama: 'Sate Gurita Pesisir Sabang',
+            kategori: 'Hidangan Utama',
+            wilayah: 'Sabang',
+            harga: 30000,
+            imageUrl: IMG_SABANG,
+            statusSertifikasiHalal: 'Belum Tersertifikasi Resmi',
+            sumberVerifikasi: 'Pedagang kaki lima lokal; bahan laut segar, belum memiliki sertifikat halal formal',
+            kontak: '+62 812-0000-0104'
+          },
+          {
+            id: 'kul-ayam-tangkap',
+            nama: 'Ayam Tangkap Daun Kari Aceh Besar',
+            kategori: 'Hidangan Utama',
+            wilayah: 'Aceh Besar',
+            harga: 42000,
+            imageUrl: IMG_KULINER,
+            statusSertifikasiHalal: 'Tersertifikasi Halal Resmi (Contoh Data)',
+            sumberVerifikasi: 'Nomor Contoh: LPPOM-MPU-AC-SIM-07 (Simulasi Demo)',
+            kontak: '+62 812-0000-0105'
+          },
+          {
+            id: 'kul-timphan',
+            nama: 'Kue Timphan & Keukarah Tradisional',
+            kategori: 'Kue & Oleh-Oleh UMKM',
+            wilayah: 'Aceh Besar',
+            harga: 25000,
+            imageUrl: IMG_KULINER,
+            statusSertifikasiHalal: 'Klaim Mandiri / Dalam Verifikasi',
+            sumberVerifikasi: 'UMKM rumahan Gampong; proses pengajuan PIRT & halal mandiri',
+            kontak: '+62 812-0000-0106'
+          },
+          {
+            id: 'kul-masam-jing',
+            nama: 'Kuah Masam Jing Ikan Depik Gayo',
+            kategori: 'Hidangan Utama',
+            wilayah: 'Aceh Tengah',
+            harga: 45000,
+            imageUrl: IMG_GAYO,
+            statusSertifikasiHalal: 'Belum Tersertifikasi Resmi',
+            sumberVerifikasi: 'Kuliner tradisional keluarga Gayo; belum tercatat sertifikat resmi',
+            kontak: '+62 812-0000-0107'
+          },
+          {
+            id: 'kul-kopi-gayo',
+            nama: 'Biji Kopi Arabika Gayo Sangrai (250g)',
+            kategori: 'Kopi & Minuman',
+            wilayah: 'Bener Meriah',
+            harga: 75000,
+            imageUrl: IMG_GAYO,
+            statusSertifikasiHalal: 'Tersertifikasi Halal Resmi (Contoh Data)',
+            sumberVerifikasi: 'Nomor Contoh: BPJPH-ID11-SIM-12 (Simulasi Demo, proses non-alkohol)',
+            kontak: '+62 812-0000-0108'
+          }
+        ],
+
+        akomodasi: [
+          {
+            id: 'ako-baiturrahman-inn',
+            nama: 'Serambi Syariah Boutique Hotel (Contoh)',
+            wilayah: 'Banda Aceh',
+            hargaPerMalam: 580000,
+            fasilitas: ['Wi-Fi cepat', 'Kamar keluarga AC', 'Restoran sarapan', 'Parkir terjaga'],
+            fasilitasRamahMuslim: ['Penunjuk arah kiblat di setiap kamar', 'Sajadah, mukena & Al-Qur’an tersedia', 'Sarapan bahan halal & bebas alkohol', 'Kebijakan menginap ramah keluarga'],
+            imageUrl: IMG_RESORT,
+            kontak: '+62 812-0000-0201'
+          },
+          {
+            id: 'ako-iboih-cottage',
+            nama: 'Teluk Rubiah Muslim-Friendly Cottage (Contoh)',
+            wilayah: 'Sabang',
+            hargaPerMalam: 490000,
+            fasilitas: ['Balkon menghadap laut', 'Perahu antar-jemput dermaga', 'AC & air hangat'],
+            fasilitasRamahMuslim: ['Arah kiblat & perlengkapan shalat', 'Area privat keluarga', 'Dapur bebas babi & minuman beralkohol'],
+            imageUrl: IMG_SABANG,
+            kontak: '+62 812-0000-0202'
+          },
+          {
+            id: 'ako-lampuuk-villa',
+            nama: 'Meunasah Pesisir Family Villa (Contoh)',
+            wilayah: 'Aceh Besar',
+            hargaPerMalam: 650000,
+            fasilitas: ['2 kamar tidur', 'Ruang tamu luas', 'Halaman bermain anak', 'Dekat pantai'],
+            fasilitasRamahMuslim: ['Ruang shalat khusus keluarga', 'Jarak jalan kaki ke Masjid Rahmatullah', 'Menu makan malam keluarga halal'],
+            imageUrl: IMG_RESORT,
+            kontak: '+62 812-0000-0203'
+          },
+          {
+            id: 'ako-tawar-lodge',
+            nama: 'Lodge Tepian Laut Tawar (Contoh)',
+            wilayah: 'Aceh Tengah',
+            hargaPerMalam: 520000,
+            fasilitas: ['Pemanas air', 'Pemandangan danau & kebun kopi', 'Sarapan kopi Gayo'],
+            fasilitasRamahMuslim: ['Sajadah & penunjuk kiblat terpasang', 'Tempat wudhu air hangat dalam kamar', 'Lingkungan tenang ramah keluarga'],
+            imageUrl: IMG_GAYO,
+            kontak: '+62 812-0000-0204'
+          },
+          {
+            id: 'ako-burni-homestay',
+            nama: 'Homestay Kebun Kopi Redelong (Contoh)',
+            wilayah: 'Bener Meriah',
+            hargaPerMalam: 350000,
+            fasilitas: ['Kamar bersih kayu Gayo', 'Teras kebun', 'Air hangat & teh/kopi gratis'],
+            fasilitasRamahMuslim: ['Perlengkapan shalat lengkap', 'Tuan rumah Muslim ramah wisatawan', 'Menu rumahan halal sesuai permintaan'],
+            imageUrl: IMG_RESORT,
+            kontak: '+62 812-0000-0205'
+          },
+          {
+            id: 'ako-darussalam-guest',
+            nama: 'Rumoh Tamu Seulanga Guest House (Contoh)',
+            wilayah: 'Banda Aceh',
+            hargaPerMalam: 390000,
+            fasilitas: ['Kamar standar & twin', 'Wi-Fi', 'Antar-jemput bandara berbayar'],
+            fasilitasRamahMuslim: ['Arah kiblat & sajadah bersih', 'Jadwal waktu shalat Banda Aceh di lobi', 'Bebas rokok & minuman keras'],
+            imageUrl: IMG_RESORT,
+            kontak: '+62 812-0000-0206'
+          }
+        ],
+
+        paket: [
+          {
+            id: 'pkg-religi-banda',
+            nama: {
+              id: 'Jejak Serambi Mekkah & Sejarah Banda Aceh',
+              en: 'Veranda of Mecca Heritage & Spiritual Trail'
+            },
+            durasi: 2,
+            daftarDestinasi: ['dest-baiturrahman', 'dest-tsunami', 'dest-pltd-apung', 'dest-peunayong-kuliner'],
+            estimasiBiaya: 1150000,
+            deskripsi: {
+              id: 'Eksplorasi 2 hari menyusuri arsitektur Masjid Raya Baiturrahman, edukasi Museum Tsunami, situs PLTD Apung, dan wisata kuliner malam Peunayong.',
+              en: '2-day spiritual and historical journey covering Baiturrahman Grand Mosque, Tsunami Museum, PLTD Apung, and Peunayong night culinary.'
+            },
+            minatKategori: ['Religi', 'Sejarah', 'Kuliner'],
+            wilayahCakupan: ['Banda Aceh']
+          },
+          {
+            id: 'pkg-bahari-sabang',
+            nama: {
+              id: 'Eksotika Bahari Sabang & Titik Nol Nusantara',
+              en: 'Sabang Marine Lagoon & Kilometer Zero Escape'
+            },
+            durasi: 3,
+            daftarDestinasi: ['dest-iboih-rubiah', 'dest-km-nol', 'dest-anoeitam', 'dest-baiturrahman'],
+            estimasiBiaya: 2450000,
+            deskripsi: {
+              id: 'Paket 3 hari penyeberangan ke Pulau Weh untuk snorkeling di Pulau Rubiah, mengunjungi Tugu Km 0 Indonesia, Benteng Anoi Itam, serta singgah di Banda Aceh.',
+              en: '3-day island getaway to Weh Island for Rubiah snorkeling, Kilometer Zero monument, Anoi Itam fort, and Banda Aceh mosque stopover.'
+            },
+            minatKategori: ['Bahari', 'Alam', 'Sejarah'],
+            wilayahCakupan: ['Sabang', 'Banda Aceh']
+          },
+          {
+            id: 'pkg-gayo-highland',
+            nama: {
+              id: 'Harmoni Dataran Tinggi Gayo & Kopi Arabika',
+              en: 'Gayo Highlands, Lake Laut Tawar & Coffee Trail'
+            },
+            durasi: 3,
+            daftarDestinasi: ['dest-laut-tawar', 'dest-kampung-gayo', 'dest-pasar-paya-ilang', 'dest-burni-telong'],
+            estimasiBiaya: 2250000,
+            deskripsi: {
+              id: 'Perjalanan 3 hari menikmati kabut Danau Laut Tawar, edukasi panen kopi Gayo, Tari Guel, kuliner Masam Jing, dan panorama Burni Telong.',
+              en: '3-day highland retreat across Lake Laut Tawar, Gayo coffee farms, Guel heritage, local Masam Jing cuisine, and Burni Telong vistas.'
+            },
+            minatKategori: ['Alam', 'Budaya', 'Kuliner'],
+            wilayahCakupan: ['Aceh Tengah', 'Bener Meriah']
+          },
+          {
+            id: 'pkg-pesisir-budaya',
+            nama: {
+              id: 'Pesisir Lampuuk, Rumoh Aceh & Wisata Keluarga',
+              en: 'Lampuuk Coast & Acehnese Heritage Family Trip'
+            },
+            durasi: 1,
+            daftarDestinasi: ['dest-lampuuk', 'dest-suhom', 'dest-rumoh-aceh'],
+            estimasiBiaya: 650000,
+            deskripsi: {
+              id: 'Perjalanan 1 hari ramah keluarga dari Banda Aceh menuju pesisir Lampuuk, Masjid Rahmatullah, Air Terjun Suhom, dan sentra tenun Rumoh Aceh.',
+              en: 'Family-friendly 1-day loop from Banda Aceh to Lampuuk Beach, Masjid Rahmatullah, Suhom Waterfall, and Rumoh Aceh weaving center.'
+            },
+            minatKategori: ['Bahari', 'Alam', 'Budaya'],
+            wilayahCakupan: ['Aceh Besar']
+          },
+          {
+            id: 'pkg-aceh-grand',
+            nama: {
+              id: 'Grand Halal Explore Aceh: Pesisir hingga Gayo',
+              en: 'Grand Halal Explore Aceh: Coast to Gayo Highlands'
+            },
+            durasi: 5,
+            daftarDestinasi: ['dest-baiturrahman', 'dest-tsunami', 'dest-iboih-rubiah', 'dest-lampuuk', 'dest-laut-tawar', 'dest-burni-telong', 'dest-simpang-balik'],
+            estimasiBiaya: 4350000,
+            deskripsi: {
+              id: 'Ekspedisi lengkap 5 hari memadukan wisata religi Banda Aceh, snorkeling Sabang, pesisir Aceh Besar, dan kesegaran pegunungan Aceh Tengah serta Bener Meriah.',
+              en: 'Comprehensive 5-day Aceh journey uniting Banda Aceh spiritual landmarks, Sabang reefs, Aceh Besar coast, and Gayo-Bener Meriah highlands.'
+            },
+            minatKategori: ['Religi', 'Bahari', 'Alam', 'Sejarah', 'Budaya', 'Kuliner'],
+            wilayahCakupan: ['Banda Aceh', 'Sabang', 'Aceh Besar', 'Aceh Tengah', 'Bener Meriah']
+          }
+        ]
+      };
+
+      const DEFAULT_ITINERARY = {
+        id: 'itin-default-1',
+        namaPerjalanan: 'Eksplorasi Halal Banda Aceh & Sabang',
+        tanggalMulai: '2026-12-12',
+        jumlahHari: 3,
+        jumlahWisatawan: 2,
+        biayaAkomodasiPerMalam: 500000,
+        biayaMakanPerHari: 120000,
+        biayaTransportPerHari: 250000,
+        daftarAktivitas: [
+          {
+            id: 'act-seed-1',
+            hariKe: 1,
+            waktu: 'Pagi',
+            judul: 'Masjid Raya Baiturrahman',
+            tipe: 'destinasi',
+            itemId: 'dest-baiturrahman',
+            wilayah: 'Banda Aceh',
+            estimasiBiaya: 0
+          },
+          {
+            id: 'act-seed-2',
+            hariKe: 1,
+            waktu: 'Siang',
+            judul: 'Museum Tsunami Aceh',
+            tipe: 'destinasi',
+            itemId: 'dest-tsunami',
+            wilayah: 'Banda Aceh',
+            estimasiBiaya: 10000
+          },
+          {
+            id: 'act-seed-3',
+            hariKe: 1,
+            waktu: 'Malam',
+            judul: 'Mie Aceh Udang & Kepiting Rempah',
+            tipe: 'kuliner',
+            itemId: 'kul-mie-aceh',
+            wilayah: 'Banda Aceh',
+            estimasiBiaya: 38000
+          },
+          {
+            id: 'act-seed-4',
+            hariKe: 2,
+            waktu: 'Pagi',
+            judul: 'Pantai Iboih & Taman Laut Pulau Rubiah',
+            tipe: 'destinasi',
+            itemId: 'dest-iboih-rubiah',
+            wilayah: 'Sabang',
+            estimasiBiaya: 50000
+          },
+          {
+            id: 'act-seed-5',
+            hariKe: 3,
+            waktu: 'Pagi',
+            judul: 'Tugu Kilometer Nol Indonesia',
+            tipe: 'destinasi',
+            itemId: 'dest-km-nol',
+            wilayah: 'Sabang',
+            estimasiBiaya: 15000
+          }
+        ],
+        totalAnggaran: 0
+      };
+
+      /* =========================================================================
+       * 3. LOCALSTORAGE STATE ENGINE
+       * ========================================================================= */
+      const STORAGE_KEYS = {
+        data: 'pesona_aceh_data_v1',
+        fav: 'pesona_aceh_favorit_v1',
+        itins: 'pesona_aceh_itineraries_v1',
+        config: 'pesona_aceh_config_v1'
+      };
+
+      function safeLoad(key, fallback) {
+        try {
+          const raw = localStorage.getItem(key);
+          return raw ? JSON.parse(raw) : structuredClone(fallback);
+        } catch (err) {
+          return structuredClone(fallback);
+        }
+      }
+
+      function safeSave(key, value) {
+        try {
+          localStorage.setItem(key, JSON.stringify(value));
+        } catch (err) {
+          console.warn('localStorage write skipped:', err);
+        }
+      }
+
+      function cloneSeed() {
+        return JSON.parse(JSON.stringify(SEED_DATA));
+      }
+
+      const state = {
+        config: safeLoad(STORAGE_KEYS.config, { lang: 'id', activeItinId: 'itin-default-1' }),
+        data: safeLoad(STORAGE_KEYS.data, cloneSeed()),
+        favorit: safeLoad(STORAGE_KEYS.fav, []),
+        itineraries: safeLoad(STORAGE_KEYS.itins, [DEFAULT_ITINERARY]),
+        ui: {
+          search: '',
+          region: 'all',
+          category: 'all',
+          sort: 'featured',
+          mapRegion: 'all',
+          selectedDestId: 'dest-baiturrahman',
+          kaTab: 'kuliner',
+          kaRegion: 'all',
+          kaHalalFilter: 'all',
+          planTab: 'itinerary',
+          recInterest: 'all',
+          recDuration: 'all',
+          recBudget: 'all',
+          crudEntity: 'destinasi',
+          crudSearch: ''
+        }
+      };
+
+      if (!Array.isArray(state.itineraries) || state.itineraries.length === 0) {
+        state.itineraries = [JSON.parse(JSON.stringify(DEFAULT_ITINERARY))];
+        state.config.activeItinId = DEFAULT_ITINERARY.id;
+      }
+
+      /* =========================================================================
+       * 4. HELPERS & SAFE ESCAPING
+       * ========================================================================= */
+      function esc(str) {
+        return String(str ?? '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function t(key) {
+        const lang = state.config.lang === 'en' ? 'en' : 'id';
+        return (I18N[lang] && I18N[lang][key]) || I18N.id[key] || key;
+      }
+
+      function locText(val) {
+        if (val && typeof val === 'object') {
+          return state.config.lang === 'en' ? (val.en || val.id || '') : (val.id || val.en || '');
+        }
+        return String(val || '');
+      }
+
+      function formatIDR(amount) {
+        const n = Number(amount) || 0;
+        if (n === 0) return t('free_label');
+        return 'Rp ' + n.toLocaleString('id-ID');
+      }
+
+      function formatMoney(amount) {
+        return 'Rp ' + (Number(amount) || 0).toLocaleString('id-ID');
+      }
+
+      function showToast(msg) {
+        const el = document.getElementById('toastBanner');
+        el.textContent = msg;
+        el.classList.add('visible');
+        clearTimeout(showToast._timer);
+        showToast._timer = setTimeout(() => el.classList.remove('visible'), 2600);
+      }
+
+      function svgArtworkFallback(category) {
+        const cat = String(category || '').toLowerCase();
+        if (cat === 'bahari') {
+          return '<svg class="card-svg-fallback" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="gB" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0D8A7E"/><stop offset="100%" stop-color="#054840"/></linearGradient></defs><rect width="400" height="300" fill="url(#gB)"/><circle cx="310" cy="70" r="32" fill="#D4A13B" opacity="0.75"/><path d="M0 190 Q100 165 200 190 T400 190 L400 300 L0 300 Z" fill="#0B2720" opacity="0.45"/><path d="M0 225 Q90 205 190 225 T400 225" stroke="#9CE5DA" stroke-width="2" fill="none"/></svg>';
+        }
+        if (cat === 'alam') {
+          return '<svg class="card-svg-fallback" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="gA" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#196950"/><stop offset="100%" stop-color="#0A2B21"/></linearGradient></defs><rect width="400" height="300" fill="url(#gA)"/><path d="M0 250 L110 120 L215 220 L300 105 L400 235 L400 300 L0 300 Z" fill="#054835"/><circle cx="85" cy="72" r="24" fill="#D4A13B" opacity="0.7"/></svg>';
+        }
+        return '<svg class="card-svg-fallback" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="gR" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0B4735"/><stop offset="100%" stop-color="#09211B"/></linearGradient></defs><rect width="400" height="300" fill="url(#gR)"/><path d="M130 230 V165 Q200 95 270 165 V230 Z" fill="#13694F"/><path d="M168 155 Q200 112 232 155 Z" fill="#D4A13B" opacity="0.85"/><rect x="90" y="230" width="220" height="8" rx="4" fill="#D4A13B" opacity="0.65"/></svg>';
+      }
+
+      /* =========================================================================
+       * 5. LANGUAGE & TOP CONTROLS
+       * ========================================================================= */
+      function applyI18n() {
+        document.documentElement.lang = state.config.lang;
+        document.querySelectorAll('[data-i18n]').forEach((el) => {
+          const key = el.getAttribute('data-i18n');
+          const txt = t(key);
+          if (key === 'halal_transparency_note') {
+            el.innerHTML = txt;
+          } else {
+            el.textContent = txt;
+          }
+        });
+        document.getElementById('destSearchInput').placeholder = t('search_ph');
+        document.getElementById('langIdBtn').classList.toggle('active', state.config.lang === 'id');
+        document.getElementById('langEnBtn').classList.toggle('active', state.config.lang === 'en');
+        updateFavCount();
+      }
+
+      /* =========================================================================
+       * 6. FAVORITES MODULE
+       * ========================================================================= */
+      function isFavorited(itemId, tipeItem) {
+        return state.favorit.some((f) => f.itemId === itemId && f.tipeItem === tipeItem);
+      }
+
+      function toggleFavorite(itemId, tipeItem) {
+        const idx = state.favorit.findIndex((f) => f.itemId === itemId && f.tipeItem === tipeItem);
+        if (idx >= 0) {
+          state.favorit.splice(idx, 1);
+          showToast(state.config.lang === 'en' ? 'Removed from favorites' : 'Dihapus dari favorit');
+        } else {
+          state.favorit.push({
+            id: 'fav-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+            itemId,
+            tipeItem,
+            tanggalDitambahkan: new Date().toISOString()
+          });
+          showToast(state.config.lang === 'en' ? 'Saved to favorites' : 'Disimpan ke favorit');
+        }
+        safeSave(STORAGE_KEYS.fav, state.favorit);
+        updateFavCount();
+        renderDestinations();
+        renderKulinerAkomodasi();
+        renderFavDrawer();
+      }
+
+      function updateFavCount() {
+        const label = state.config.lang === 'en' ? 'Favorites' : 'Favorit';
+        document.getElementById('favTriggerLabel').textContent = `${label} (${state.favorit.length})`;
+      }
+
+      function findCatalogItem(itemId, tipeItem) {
+        if (tipeItem === 'destinasi') return state.data.destinasi.find((d) => d.id === itemId);
+        if (tipeItem === 'kuliner') return state.data.kuliner.find((k) => k.id === itemId);
+        if (tipeItem === 'akomodasi') return state.data.akomodasi.find((a) => a.id === itemId);
+        return null;
+      }
+
+      function renderFavDrawer() {
+        const container = document.getElementById('favDrawerList');
+        if (state.favorit.length === 0) {
+          container.innerHTML = `<div class="empty-state">${state.config.lang === 'en' ? 'No saved favorites yet. Click the heart button on any destination, culinary item, or stay.' : 'Belum ada item favorit. Tekan ikon hati pada destinasi, kuliner, atau akomodasi untuk menyimpannya di sini.'}</div>`;
+          return;
+        }
+        container.innerHTML = state.favorit.map((fav) => {
+          const item = findCatalogItem(fav.itemId, fav.tipeItem);
+          if (!item) return '';
+          const title = esc(locText(item.nama));
+          const typeLabel = fav.tipeItem === 'destinasi' ? t('ent_destinasi') : fav.tipeItem === 'kuliner' ? t('ent_kuliner') : t('ent_akomodasi');
+          const price = fav.tipeItem === 'destinasi' ? item.estimasiBiaya : fav.tipeItem === 'kuliner' ? item.harga : item.hargaPerMalam;
+          return `
+            <div style="border:1px solid var(--border-hairline);border-radius:var(--radius-sm);padding:14px;background:var(--bg-canvas);display:flex;flex-direction:column;gap:8px;">
+              <div class="meta-line">${esc(typeLabel)} · ${esc(item.wilayah)} · ${esc(new Date(fav.tanggalDitambahkan).toLocaleDateString('id-ID'))}</div>
+              <div style="font-weight:700;font-family:var(--font-display);font-size:1.18rem;">${title}</div>
+              <div class="meta-line tabular">${esc(formatIDR(price))} (${esc(t('sim_tag'))})</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;padding-top:4px;">
+                ${fav.tipeItem === 'destinasi' ? `<button type="button" class="btn-secondary btn-sm" data-open-detail="${esc(item.id)}">${esc(t('detail_btn'))}</button>` : ''}
+                <button type="button" class="btn-secondary btn-sm" data-quick-itin="${esc(item.id)}" data-quick-type="${esc(fav.tipeItem)}">${esc(t('add_itin_btn'))}</button>
+                <button type="button" class="btn-secondary btn-sm btn-danger" data-remove-fav-id="${esc(item.id)}" data-remove-fav-type="${esc(fav.tipeItem)}">${state.config.lang === 'en' ? 'Remove' : 'Hapus'}</button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      /* =========================================================================
+       * 7. DESTINATIONS CATALOG & FILTERS
+       * ========================================================================= */
+      function renderFilterBars() {
+        const regBar = document.getElementById('regionFilterBar');
+        regBar.innerHTML = `<span class="filter-label">${state.config.lang === 'en' ? 'Region:' : 'Wilayah:'}</span>` +
+          `<button type="button" class="seg-btn ${state.ui.region === 'all' ? 'active' : ''}" data-filter-region="all">${esc(t('all_regions'))}</button>` +
+          REGIONS.map((r) => `<button type="button" class="seg-btn ${state.ui.region === r ? 'active' : ''}" data-filter-region="${esc(r)}">${esc(r)}</button>`).join('');
+
+        const catBar = document.getElementById('categoryFilterBar');
+        catBar.innerHTML = `<span class="filter-label">${state.config.lang === 'en' ? 'Category:' : 'Kategori:'}</span>` +
+          `<button type="button" class="seg-btn ${state.ui.category === 'all' ? 'active' : ''}" data-filter-category="all">${esc(t('all_categories'))}</button>` +
+          CATEGORIES.map((c) => {
+            const label = state.config.lang === 'en' ? (CAT_LABELS_EN[c] || c) : c;
+            return `<button type="button" class="seg-btn ${state.ui.category === c ? 'active' : ''}" data-filter-category="${esc(c)}">${esc(label)}</button>`;
+          }).join('');
+      }
+
+      function getFilteredDestinations() {
+        const q = state.ui.search.trim().toLowerCase();
+        let list = state.data.destinasi.filter((d) => {
+          if (state.ui.region !== 'all' && d.wilayah !== state.ui.region) return false;
+          if (state.ui.category !== 'all' && d.kategori !== state.ui.category) return false;
+          if (q) {
+            const haystack = [
+              locText(d.nama),
+              d.wilayah,
+              d.kategori,
+              d.alamat,
+              locText(d.deskripsi),
+              ...(d.fasilitas || []),
+              ...(d.fasilitasIbadah || [])
+            ].join(' ').toLowerCase();
+            if (!haystack.includes(q)) return false;
+          }
+          return true;
+        });
+
+        list = list.slice().sort((a, b) => {
+          if (state.ui.sort === 'cost_asc') return (a.estimasiBiaya || 0) - (b.estimasiBiaya || 0);
+          if (state.ui.sort === 'cost_desc') return (b.estimasiBiaya || 0) - (a.estimasiBiaya || 0);
+          if (state.ui.sort === 'name_asc') return locText(a.nama).localeCompare(locText(b.nama));
+          if (a.unggulan !== b.unggulan) return a.unggulan ? -1 : 1;
+          return locText(a.nama).localeCompare(locText(b.nama));
+        });
+        return list;
+      }
+
+      function renderDestinations() {
+        renderFilterBars();
+        const items = getFilteredDestinations();
+        const countWord = state.config.lang === 'en' ? 'destinations' : 'destinasi';
+        document.getElementById('destCountLabel').textContent = `${items.length} ${countWord}`;
+
+        const grid = document.getElementById('destinationsGrid');
+        if (items.length === 0) {
+          grid.innerHTML = `
+            <div class="empty-state" style="grid-column:1 / -1;">
+              <p style="margin:0 0 12px;">${state.config.lang === 'en' ? 'No destinations match your current search or filters.' : 'Tidak ada destinasi yang sesuai dengan pencarian atau filter Anda.'}</p>
+              <button type="button" class="btn-secondary btn-sm" id="resetDestFiltersBtn">${state.config.lang === 'en' ? 'Reset Filters' : 'Reset Filter'}</button>
+            </div>
+          `;
+          return;
+        }
+
+        grid.innerHTML = items.map((d) => {
+          const saved = isFavorited(d.id, 'destinasi');
+          const catLabel = state.config.lang === 'en' ? (CAT_LABELS_EN[d.kategori] || d.kategori) : d.kategori;
+          const verifShort = d.statusVerifikasiInfo === 'Terverifikasi Dasar'
+            ? (state.config.lang === 'en' ? 'Basic Verified' : 'Terverifikasi Dasar')
+            : (state.config.lang === 'en' ? 'Field Verification Pending' : 'Belum Diverifikasi Lapangan');
+          const verifClass = d.statusVerifikasiInfo === 'Terverifikasi Dasar' ? 'status-verified' : 'status-pending';
+          const worshipPreview = (d.fasilitasIbadah && d.fasilitasIbadah[0]) ? d.fasilitasIbadah[0] : '-';
+          return `
+            <article class="editorial-card">
+              <div class="card-media">
+                ${svgArtworkFallback(d.kategori)}
+                <img src="${esc(d.imageUrl)}" alt="${esc(locText(d.nama))}" referrerpolicy="no-referrer" onerror="this.style.display='none'" />
+              </div>
+              <div class="card-body">
+                <div class="meta-line">
+                  ${esc(d.wilayah)} · ${esc(catLabel)} · <span class="${verifClass}">${esc(verifShort)}</span>
+                </div>
+                <h3 class="card-title">${esc(locText(d.nama))}</h3>
+                <p class="card-desc">${esc(locText(d.deskripsi))}</p>
+                <div class="card-info-rows">
+                  <div><strong>${state.config.lang === 'en' ? 'Worship:' : 'Ibadah:'}</strong> ${esc(worshipPreview)}</div>
+                  <div><strong>${state.config.lang === 'en' ? 'Est. Cost:' : 'Est. Biaya:'}</strong> <span class="tabular">${esc(formatIDR(d.estimasiBiaya))}</span> (${esc(t('sim_tag'))})</div>
+                </div>
+                <div class="card-actions">
+                  <button type="button" class="btn-primary btn-sm" data-open-detail="${esc(d.id)}">${esc(t('detail_btn'))}</button>
+                  <button type="button" class="btn-secondary btn-sm" data-quick-itin="${esc(d.id)}" data-quick-type="destinasi">${esc(t('add_itin_btn'))}</button>
+                  <button type="button" class="icon-fav-btn ${saved ? 'saved' : ''}" data-toggle-fav="${esc(d.id)}" data-fav-type="destinasi" aria-pressed="${saved}" aria-label="Simpan ${esc(locText(d.nama))} ke favorit">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="${saved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M12 21s-7-4.35-9.33-8.28C.68 9.39 2.4 5 6.5 5c2.2 0 3.7 1.2 5.5 3.1C13.8 6.2 15.3 5 17.5 5c4.1 0 5.82 4.39 3.83 7.72C19 16.65 12 21 12 21z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join('');
+      }
+
+      /* =========================================================================
+       * 8. ILLUSTRATIVE SVG MAP & INSPECTOR
+       * ========================================================================= */
+      function renderMap() {
+        const regBtns = document.getElementById('mapRegionButtons');
+        regBtns.innerHTML =
+          `<button type="button" class="seg-btn ${state.ui.mapRegion === 'all' ? 'active' : ''}" data-map-region="all">${esc(t('all_regions'))}</button>` +
+          REGIONS.map((r) => `<button type="button" class="seg-btn ${state.ui.mapRegion === r ? 'active' : ''}" data-map-region="${esc(r)}">${esc(r)}</button>`).join('');
+
+        const visibleDests = state.data.destinasi.filter((d) => state.ui.mapRegion === 'all' || d.wilayah === state.ui.mapRegion);
+        if (!visibleDests.some((d) => d.id === state.ui.selectedDestId) && visibleDests.length > 0) {
+          state.ui.selectedDestId = visibleDests[0].id;
+        }
+
+        const pinsGroup = document.getElementById('svgMapPins');
+        pinsGroup.innerHTML = visibleDests.map((d) => {
+          const x = (d.mapCoords && d.mapCoords.x) || 260;
+          const y = (d.mapCoords && d.mapCoords.y) || 240;
+          const selected = d.id === state.ui.selectedDestId;
+          const fill = selected ? '#B07C1B' : '#056347';
+          const r = selected ? 10 : 7;
+          return `
+            <g class="map-pin" data-map-pin="${esc(d.id)}" tabindex="0" role="button" aria-label="${esc(locText(d.nama))} (${esc(d.wilayah)})">
+              <circle class="pin-outer" cx="${x}" cy="${y}" r="${r + 4}" fill="${fill}" fill-opacity="0.22" stroke="${fill}" stroke-width="${selected ? 2.5 : 1.2}"/>
+              <circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" stroke="#FFFFFF" stroke-width="2"/>
+              ${selected ? `<text x="${x}" y="${y - 16}" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="11" font-weight="700" fill="#0F231D" stroke="#FFFFFF" stroke-width="3" paint-order="stroke">${esc(locText(d.nama))}</text>` : ''}
+            </g>
+          `;
+        }).join('');
+
+        const inspector = document.getElementById('mapInspector');
+        const sel = state.data.destinasi.find((d) => d.id === state.ui.selectedDestId) || visibleDests[0];
+        if (!sel) {
+          inspector.innerHTML = `<div class="empty-state">${state.config.lang === 'en' ? 'No destination in this region.' : 'Tidak ada destinasi di wilayah ini.'}</div>`;
+          return;
+        }
+
+        inspector.innerHTML = `
+          <div class="meta-line">${esc(sel.wilayah)} · ${esc(sel.kategori)} · ${esc(sel.statusVerifikasiInfo)}</div>
+          <h3 style="font-family:var(--font-display);font-size:1.5rem;margin:0;">${esc(locText(sel.nama))}</h3>
+          <p style="margin:0;font-size:0.9rem;color:var(--ink-secondary);">${esc(locText(sel.deskripsi))}</p>
+          <div style="font-size:0.85rem;color:var(--ink-secondary);display:flex;flex-direction:column;gap:4px;">
+            <div><strong>${state.config.lang === 'en' ? 'Address:' : 'Alamat:'}</strong> ${esc(sel.alamat)}</div>
+            <div><strong>${state.config.lang === 'en' ? 'Worship:' : 'Fasilitas Ibadah:'}</strong> ${esc((sel.fasilitasIbadah || []).join(' · '))}</div>
+            <div><strong>${state.config.lang === 'en' ? 'Est. Cost:' : 'Est. Biaya:'}</strong> <span class="tabular">${esc(formatIDR(sel.estimasiBiaya))}</span> (${esc(t('sim_tag'))})</div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a href="${esc(sel.mapsUrl)}" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">${esc(t('open_maps_btn'))}</a>
+            <button type="button" class="btn-secondary btn-sm" data-open-detail="${esc(sel.id)}">${esc(t('detail_btn'))}</button>
+            <button type="button" class="btn-secondary btn-sm" data-filter-catalog-region="${esc(sel.wilayah)}">${state.config.lang === 'en' ? 'Filter Catalog' : 'Filter Katalog'}</button>
+          </div>
+          <div style="border-top:1px solid var(--border-hairline);padding-top:12px;">
+            <p class="meta-line" style="margin:0 0 8px;">${state.config.lang === 'en' ? 'Destinations on map:' : 'Daftar titik pada peta:'} (${visibleDests.length})</p>
+            <div class="inspector-list">
+              ${visibleDests.map((d) => `
+                <button type="button" class="inspector-item ${d.id === sel.id ? 'active' : ''}" data-map-pin="${esc(d.id)}">
+                  <span style="font-weight:600;font-size:0.86rem;">${esc(locText(d.nama))}</span>
+                  <span class="meta-line" style="flex-shrink:0;">${esc(d.wilayah)}</span>
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      /* =========================================================================
+       * 9. KULINER HALAL & AKOMODASI RAMAH MUSLIM
+       * ========================================================================= */
+      function renderKulinerAkomodasi() {
+        const isKuliner = state.ui.kaTab === 'kuliner';
+        document.getElementById('tabKulinerBtn').classList.toggle('active', isKuliner);
+        document.getElementById('tabAkomodasiBtn').classList.toggle('active', !isKuliner);
+
+        const filterPanel = document.getElementById('kaFilterPanel');
+        const halalStatuses = ['Tersertifikasi Halal Resmi (Contoh Data)', 'Klaim Mandiri / Dalam Verifikasi', 'Belum Tersertifikasi Resmi'];
+        filterPanel.innerHTML = `
+          <div class="filter-row">
+            <span class="filter-label">${state.config.lang === 'en' ? 'Region:' : 'Wilayah:'}</span>
+            <button type="button" class="seg-btn ${state.ui.kaRegion === 'all' ? 'active' : ''}" data-ka-region="all">${esc(t('all_regions'))}</button>
+            ${REGIONS.map((r) => `<button type="button" class="seg-btn ${state.ui.kaRegion === r ? 'active' : ''}" data-ka-region="${esc(r)}">${esc(r)}</button>`).join('')}
+          </div>
+          ${isKuliner ? `
+            <div class="filter-row">
+              <span class="filter-label">${state.config.lang === 'en' ? 'Halal Status:' : 'Status Halal:'}</span>
+              <button type="button" class="seg-btn ${state.ui.kaHalalFilter === 'all' ? 'active' : ''}" data-ka-halal="all">${state.config.lang === 'en' ? 'All Statuses' : 'Semua Status'}</button>
+              ${halalStatuses.map((st) => `<button type="button" class="seg-btn ${state.ui.kaHalalFilter === st ? 'active' : ''}" data-ka-halal="${esc(st)}">${esc(st)}</button>`).join('')}
+            </div>
+          ` : ''}
+        `;
+
+        const grid = document.getElementById('kaGrid');
+        if (isKuliner) {
+          const items = state.data.kuliner.filter((k) => {
+            if (state.ui.kaRegion !== 'all' && k.wilayah !== state.ui.kaRegion) return false;
+            if (state.ui.kaHalalFilter !== 'all' && k.statusSertifikasiHalal !== state.ui.kaHalalFilter) return false;
+            return true;
+          });
+          if (items.length === 0) {
+            grid.innerHTML = `<div class="empty-state" style="grid-column:1 / -1;">${state.config.lang === 'en' ? 'No culinary items match this filter.' : 'Tidak ada kuliner atau produk UMKM yang sesuai filter.'}</div>`;
+            return;
+          }
+          grid.innerHTML = items.map((k) => {
+            const saved = isFavorited(k.id, 'kuliner');
+            const stClass = k.statusSertifikasiHalal.includes('Resmi') ? 'status-verified'
+              : k.statusSertifikasiHalal.includes('Mandiri') ? 'status-pending' : 'status-unverified';
+            return `
+              <article class="editorial-card">
+                <div class="card-media">
+                  ${svgArtworkFallback('kuliner')}
+                  <img src="${esc(k.imageUrl)}" alt="${esc(k.nama)}" referrerpolicy="no-referrer" onerror="this.style.display='none'" />
+                </div>
+                <div class="card-body">
+                  <div class="meta-line">${esc(k.wilayah)} · ${esc(k.kategori)}</div>
+                  <h3 class="card-title">${esc(k.nama)}</h3>
+                  <div class="card-info-rows">
+                    <div><strong>Status Halal:</strong> <span class="status-text ${stClass}">${esc(k.statusSertifikasiHalal)}</span></div>
+                    <div><strong>${state.config.lang === 'en' ? 'Verification Source:' : 'Sumber Verifikasi:'}</strong> ${esc(k.sumberVerifikasi)}</div>
+                    <div><strong>${state.config.lang === 'en' ? 'Price:' : 'Harga:'}</strong> <span class="tabular">${esc(formatIDR(k.harga))}</span> (${esc(t('sim_tag'))})</div>
+                    <div><strong>Kontak UMKM:</strong> <span class="tabular">${esc(k.kontak)}</span> (Simulasi)</div>
+                  </div>
+                  <div class="card-actions">
+                    <button type="button" class="btn-primary btn-sm" data-wa-demo="${esc(k.nama)}" data-wa-phone="${esc(k.kontak)}" data-wa-kind="UMKM Kuliner">${esc(t('wa_demo_btn'))}</button>
+                    <button type="button" class="btn-secondary btn-sm" data-quick-itin="${esc(k.id)}" data-quick-type="kuliner">${esc(t('add_itin_btn'))}</button>
+                    <button type="button" class="icon-fav-btn ${saved ? 'saved' : ''}" data-toggle-fav="${esc(k.id)}" data-fav-type="kuliner" aria-pressed="${saved}" aria-label="Simpan ${esc(k.nama)} ke favorit">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="${saved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-4.35-9.33-8.28C.68 9.39 2.4 5 6.5 5c2.2 0 3.7 1.2 5.5 3.1C13.8 6.2 15.3 5 17.5 5c4.1 0 5.82 4.39 3.83 7.72C19 16.65 12 21 12 21z"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </article>
+            `;
+          }).join('');
+        } else {
+          const items = state.data.akomodasi.filter((a) => state.ui.kaRegion === 'all' || a.wilayah === state.ui.kaRegion);
+          if (items.length === 0) {
+            grid.innerHTML = `<div class="empty-state" style="grid-column:1 / -1;">${state.config.lang === 'en' ? 'No accommodations match this region.' : 'Tidak ada akomodasi pada wilayah ini.'}</div>`;
+            return;
+          }
+          grid.innerHTML = items.map((a) => {
+            const saved = isFavorited(a.id, 'akomodasi');
+            return `
+              <article class="editorial-card">
+                <div class="card-media">
+                  ${svgArtworkFallback('akomodasi')}
+                  <img src="${esc(a.imageUrl)}" alt="${esc(a.nama)}" referrerpolicy="no-referrer" onerror="this.style.display='none'" />
+                </div>
+                <div class="card-body">
+                  <div class="meta-line">${esc(a.wilayah)} · <span class="status-verified">${state.config.lang === 'en' ? 'Muslim-Friendly Hospitality' : 'Layanan Ramah Muslim'}</span></div>
+                  <h3 class="card-title">${esc(a.nama)}</h3>
+                  <div class="card-info-rows">
+                    <div><strong>${state.config.lang === 'en' ? 'Muslim-Friendly:' : 'Fasilitas Ramah Muslim:'}</strong> ${esc((a.fasilitasRamahMuslim || []).join(', '))}</div>
+                    <div><strong>${state.config.lang === 'en' ? 'General:' : 'Fasilitas Umum:'}</strong> ${esc((a.fasilitas || []).join(', '))}</div>
+                    <div><strong>${state.config.lang === 'en' ? 'Rate / Night:' : 'Tarif / Malam:'}</strong> <span class="tabular">${esc(formatIDR(a.hargaPerMalam))}</span> (${esc(t('sim_tag'))})</div>
+                    <div><strong>Kontak:</strong> <span class="tabular">${esc(a.kontak)}</span> (Simulasi)</div>
+                  </div>
+                  <div class="card-actions">
+                    <button type="button" class="btn-primary btn-sm" data-wa-demo="${esc(a.nama)}" data-wa-phone="${esc(a.kontak)}" data-wa-kind="Akomodasi">${esc(t('wa_demo_btn'))}</button>
+                    <button type="button" class="btn-secondary btn-sm" data-apply-accom-rate="${a.hargaPerMalam}">${state.config.lang === 'en' ? 'Use in Budget' : 'Pakai di Kalkulator'}</button>
+                    <button type="button" class="icon-fav-btn ${saved ? 'saved' : ''}" data-toggle-fav="${esc(a.id)}" data-fav-type="akomodasi" aria-pressed="${saved}" aria-label="Simpan ${esc(a.nama)} ke favorit">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="${saved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-4.35-9.33-8.28C.68 9.39 2.4 5 6.5 5c2.2 0 3.7 1.2 5.5 3.1C13.8 6.2 15.3 5 17.5 5c4.1 0 5.82 4.39 3.83 7.72C19 16.65 12 21 12 21z"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </article>
+            `;
+          }).join('');
+        }
+      }
+
+      /* =========================================================================
+       * 10. ITINERARY PLANNER (1-5 DAYS) & BUDGET CALCULATOR
+       * ========================================================================= */
+      function getActiveItinerary() {
+        let itin = state.itineraries.find((i) => i.id === state.config.activeItinId);
+        if (!itin) {
+          itin = state.itineraries[0];
+          state.config.activeItinId = itin.id;
+        }
+        return itin;
+      }
+
+      function computeBudget(itin) {
+        const days = Math.min(5, Math.max(1, Number(itin.jumlahHari) || 1));
+        const nights = Math.max(0, days - 1);
+        const travelers = Math.max(1, Number(itin.jumlahWisatawan) || 1);
+        const actPerPerson = (itin.daftarAktivitas || [])
+          .filter((a) => a.hariKe <= days)
+          .reduce((sum, a) => sum + (Number(a.estimasiBiaya) || 0), 0);
+
+        const totalActivities = actPerPerson * travelers;
+        const roomsNeeded = Math.ceil(travelers / 2);
+        const totalAccom = nights * roomsNeeded * (Number(itin.biayaAkomodasiPerMalam) || 0);
+        const totalMeals = days * travelers * (Number(itin.biayaMakanPerHari) || 0);
+        const totalTransport = days * (Number(itin.biayaTransportPerHari) || 0);
+        const grandTotal = totalActivities + totalAccom + totalMeals + totalTransport;
+        itin.totalAnggaran = grandTotal;
+
+        return {
+          days,
+          nights,
+          travelers,
+          roomsNeeded,
+          totalActivities,
+          totalAccom,
+          totalMeals,
+          totalTransport,
+          grandTotal,
+          perPerson: Math.round(grandTotal / travelers)
+        };
+      }
+
+      function persistItineraries() {
+        const itin = getActiveItinerary();
+        computeBudget(itin);
+        safeSave(STORAGE_KEYS.itins, state.itineraries);
+        safeSave(STORAGE_KEYS.config, state.config);
+      }
+
+      function renderPlanner() {
+        const isPlanner = state.ui.planTab === 'itinerary';
+        document.getElementById('tabPlannerBtn').classList.toggle('active', isPlanner);
+        document.getElementById('tabPackagesBtn').classList.toggle('active', !isPlanner);
+        document.getElementById('plannerPanel').style.display = isPlanner ? 'grid' : 'none';
+        document.getElementById('packagesPanel').style.display = isPlanner ? 'none' : 'block';
+
+        const itin = getActiveItinerary();
+        const savedSelect = document.getElementById('savedItinerarySelect');
+        savedSelect.innerHTML = state.itineraries.map((it) =>
+          `<option value="${esc(it.id)}" ${it.id === itin.id ? 'selected' : ''}>${esc(it.namaPerjalanan)} (${it.jumlahHari}H)</option>`
+        ).join('');
+
+        document.getElementById('itinNameInput').value = itin.namaPerjalanan;
+        document.getElementById('itinDateInput').value = itin.tanggalMulai;
+        document.getElementById('itinDaysSelect').value = String(itin.jumlahHari);
+        document.getElementById('itinTravelersInput').value = String(itin.jumlahWisatawan);
+        document.getElementById('calcAccomInput').value = String(itin.biayaAkomodasiPerMalam || 0);
+        document.getElementById('calcMealInput').value = String(itin.biayaMakanPerHari || 0);
+        document.getElementById('calcTransInput').value = String(itin.biayaTransportPerHari || 0);
+
+        const daySel = document.getElementById('actDaySelect');
+        const prevDayVal = daySel.value || '1';
+        daySel.innerHTML = Array.from({ length: itin.jumlahHari }, (_, idx) => {
+          const d = idx + 1;
+          return `<option value="${d}" ${String(d) === prevDayVal ? 'selected' : ''}>${state.config.lang === 'en' ? 'Day' : 'Hari'} ${d}</option>`;
+        }).join('');
+
+        const srcSel = document.getElementById('actSourceSelect');
+        srcSel.innerHTML = `<option value="custom">${state.config.lang === 'en' ? '-- Custom Activity --' : '-- Aktivitas Kustom --'}</option>` +
+          `<optgroup label="${esc(t('ent_destinasi'))}">` +
+          state.data.destinasi.map((d) => `<option value="destinasi|${esc(d.id)}">${esc(locText(d.nama))} (${esc(d.wilayah)})</option>`).join('') +
+          `</optgroup><optgroup label="${esc(t('ent_kuliner'))}">` +
+          state.data.kuliner.map((k) => `<option value="kuliner|${esc(k.id)}">${esc(k.nama)} (${esc(k.wilayah)})</option>`).join('') +
+          `</optgroup>`;
+
+        const daysBox = document.getElementById('itineraryDaysContainer');
+        let daysHtml = '';
+        for (let day = 1; day <= itin.jumlahHari; day++) {
+          const acts = (itin.daftarAktivitas || []).filter((a) => Number(a.hariKe) === day);
+          daysHtml += `
+            <div class="day-block">
+              <div class="day-header">
+                <h4 style="margin:0;font-family:var(--font-display);font-size:1.25rem;">${state.config.lang === 'en' ? 'Day' : 'Hari'} ${day}</h4>
+                <span class="meta-line tabular">${acts.length} ${state.config.lang === 'en' ? 'activities' : 'aktivitas'}</span>
+              </div>
+              ${acts.length === 0 ? `<p class="meta-line" style="margin:6px 0;">${state.config.lang === 'en' ? 'No activities scheduled yet for this day.' : 'Belum ada aktivitas terjadwal untuk hari ini.'}</p>` : acts.map((act) => `
+                <div class="activity-row">
+                  <div>
+                    <div class="meta-line">${esc(act.waktu)} · ${esc(act.wilayah || 'Aceh')}</div>
+                    <div style="font-weight:600;">${esc(act.judul)}</div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <span class="tabular" style="font-size:0.85rem;color:var(--ink-secondary);">${esc(formatIDR(act.estimasiBiaya))}</span>
+                    <button type="button" class="btn-secondary btn-sm btn-danger" data-del-act="${esc(act.id)}" aria-label="Hapus aktivitas">&times;</button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `;
+        }
+        daysBox.innerHTML = daysHtml;
+
+        const b = computeBudget(itin);
+        document.getElementById('budgetBreakdown').innerHTML = `
+          <div class="budget-line">
+            <span>${state.config.lang === 'en' ? 'Tickets & Activities' : 'Tiket & Aktivitas'} (${b.travelers} org)</span>
+            <span class="tabular">${esc(formatMoney(b.totalActivities))}</span>
+          </div>
+          <div class="budget-line">
+            <span>${state.config.lang === 'en' ? 'Stay' : 'Penginapan'} (${b.nights} mlm × ${b.roomsNeeded} kmr)</span>
+            <span class="tabular">${esc(formatMoney(b.totalAccom))}</span>
+          </div>
+          <div class="budget-line">
+            <span>${state.config.lang === 'en' ? 'Halal Meals' : 'Konsumsi Halal'} (${b.days} hr × ${b.travelers} org)</span>
+            <span class="tabular">${esc(formatMoney(b.totalMeals))}</span>
+          </div>
+          <div class="budget-line">
+            <span>${state.config.lang === 'en' ? 'Local Transport' : 'Transportasi Lokal'} (${b.days} hr)</span>
+            <span class="tabular">${esc(formatMoney(b.totalTransport))}</span>
+          </div>
+          <div class="budget-total">
+            <span>${state.config.lang === 'en' ? 'Total Estimate (Group)' : 'Total Estimasi (Grup)'}</span>
+            <span class="tabular">${esc(formatMoney(b.grandTotal))}</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding-top:6px;font-size:0.88rem;color:var(--ink-secondary);">
+            <span>${state.config.lang === 'en' ? 'Estimate per Traveler' : 'Estimasi per Wisatawan'}</span>
+            <span class="tabular" style="font-weight:600;">${esc(formatMoney(b.perPerson))}</span>
+          </div>
+        `;
+
+        renderPackages();
+      }
+
+      function addActivityToActiveItinerary(judul, tipe, itemId, wilayah, biaya, hariKe, waktu) {
+        const itin = getActiveItinerary();
+        itin.daftarAktivitas.push({
+          id: 'act-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+          hariKe: Number(hariKe) || 1,
+          waktu: waktu || 'Pagi',
+          judul,
+          tipe,
+          itemId: itemId || null,
+          wilayah: wilayah || 'Aceh',
+          estimasiBiaya: Number(biaya) || 0
+        });
+        persistItineraries();
+        renderPlanner();
+      }
+
+      /* =========================================================================
+       * 11. RULE-BASED PACKAGE RECOMMENDATION
+       * ========================================================================= */
+      function renderPackages() {
+        const interest = state.ui.recInterest;
+        const duration = state.ui.recDuration;
+        const budget = state.ui.recBudget;
+
+        const evaluated = state.data.paket.map((pkg) => {
+          let score = 0;
+          const reasons = [];
+
+          if (interest === 'all' || (pkg.minatKategori && pkg.minatKategori.includes(interest))) {
+            score += 3;
+            if (interest !== 'all') reasons.push((state.config.lang === 'en' ? 'Matches interest: ' : 'Cocok minat: ') + interest);
+          }
+
+          if (duration === 'all') {
+            score += 2;
+          } else if (duration === 'short' && pkg.durasi <= 2) {
+            score += 3;
+            reasons.push(state.config.lang === 'en' ? 'Short 1–2 day fit' : 'Durasi singkat 1–2 hari sesuai');
+          } else if (duration === 'medium' && pkg.durasi === 3) {
+            score += 3;
+            reasons.push(state.config.lang === 'en' ? '3-day duration match' : 'Durasi 3 hari sesuai');
+          } else if (duration === 'long' && pkg.durasi >= 4) {
+            score += 3;
+            reasons.push(state.config.lang === 'en' ? 'Extended 4–5 day match' : 'Durasi lengkap 4–5 hari sesuai');
+          }
+
+          if (budget === 'all') {
+            score += 2;
+          } else if (pkg.estimasiBiaya <= Number(budget)) {
+            score += 3;
+            reasons.push(state.config.lang === 'en' ? 'Within simulated budget' : 'Masuk dalam batas anggaran simulasi');
+          }
+
+          const interestPass = interest === 'all' || (pkg.minatKategori && pkg.minatKategori.includes(interest));
+          const durPass = duration === 'all' ||
+            (duration === 'short' && pkg.durasi <= 2) ||
+            (duration === 'medium' && pkg.durasi === 3) ||
+            (duration === 'long' && pkg.durasi >= 4);
+          const budPass = budget === 'all' || pkg.estimasiBiaya <= Number(budget);
+
+          return { pkg, score, reasons, exactMatch: interestPass && durPass && budPass };
+        });
+
+        const filtered = evaluated.filter((e) => e.exactMatch).sort((a, b) => b.score - a.score);
+        const grid = document.getElementById('packagesResultGrid');
+
+        if (filtered.length === 0) {
+          grid.innerHTML = `<div class="empty-state" style="grid-column:1 / -1;">${state.config.lang === 'en' ? 'No packages match all selected rules. Try loosening your duration or budget filter.' : 'Tidak ada paket wisata yang memenuhi seluruh aturan filter. Coba perluas rentang durasi atau anggaran.'}</div>`;
+          return;
+        }
+
+        grid.innerHTML = filtered.map(({ pkg, reasons }) => {
+          const destNames = (pkg.daftarDestinasi || []).map((id) => {
+            const d = state.data.destinasi.find((x) => x.id === id);
+            return d ? locText(d.nama) : id;
+          });
+          return `
+            <article class="pkg-card">
+              <div class="meta-line">${pkg.durasi} ${state.config.lang === 'en' ? 'Days' : 'Hari'} · ${esc((pkg.wilayahCakupan || []).join(', '))}</div>
+              <h3 style="font-family:var(--font-display);font-size:1.45rem;margin:0;">${esc(locText(pkg.nama))}</h3>
+              <p style="margin:0;font-size:0.9rem;color:var(--ink-secondary);">${esc(locText(pkg.deskripsi))}</p>
+              <div style="font-size:0.84rem;color:var(--ink-secondary);">
+                <strong>${state.config.lang === 'en' ? 'Included Stops:' : 'Destinasi Tercakup:'}</strong> ${esc(destNames.join(' · '))}
+              </div>
+              <div style="font-size:0.84rem;color:var(--emerald);font-weight:600;">
+                ${reasons.length > 0 ? esc(reasons.join(' · ')) : (state.config.lang === 'en' ? 'All-around recommended Aceh route' : 'Rekomendasi paket wisata umum Aceh')}
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--border-hairline);padding-top:12px;margin-top:auto;flex-wrap:wrap;">
+                <div>
+                  <div class="meta-line">${esc(t('sim_tag'))} / org</div>
+                  <div class="tabular" style="font-weight:700;font-size:1.1rem;color:var(--emerald);">${esc(formatMoney(pkg.estimasiBiaya))}</div>
+                </div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                  <button type="button" class="btn-primary btn-sm" data-apply-pkg="${esc(pkg.id)}">${esc(t('apply_pkg_btn'))}</button>
+                  <button type="button" class="btn-secondary btn-sm" data-wa-demo="${esc(locText(pkg.nama))}" data-wa-phone="+62 812-0000-0300" data-wa-kind="Paket Wisata">${esc(t('wa_demo_btn'))}</button>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join('');
+      }
+
+      /* =========================================================================
+       * 12. MODALS: DETAIL, WHATSAPP DEMO, CRUD
+       * ========================================================================= */
+      function openDetailModal(destId) {
+        const d = state.data.destinasi.find((x) => x.id === destId);
+        if (!d) return;
+        const saved = isFavorited(d.id, 'destinasi');
+        const itin = getActiveItinerary();
+        const modal = document.getElementById('detailModalContent');
+        modal.innerHTML = `
+          <div class="modal-head">
+            <div>
+              <div class="meta-line">${esc(d.wilayah)} · ${esc(d.kategori)} · ${esc(d.statusVerifikasiInfo)}</div>
+              <h3 id="detailModalTitle" style="font-family:var(--font-display);font-size:1.75rem;margin:4px 0 0;">${esc(locText(d.nama))}</h3>
+            </div>
+            <button type="button" class="close-btn" id="closeDetailModalBtn" aria-label="Tutup detail">&times;</button>
+          </div>
+          <div class="card-media" style="border-radius:var(--radius-sm);margin-bottom:16px;aspect-ratio:16/9;">
+            ${svgArtworkFallback(d.kategori)}
+            <img src="${esc(d.imageUrl)}" alt="${esc(locText(d.nama))}" referrerpolicy="no-referrer" onerror="this.style.display='none'" />
+          </div>
+          <p style="margin:0 0 16px;color:var(--ink-secondary);">${esc(locText(d.deskripsi))}</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;font-size:0.88rem;">
+            <div style="border:1px solid var(--border-hairline);border-radius:var(--radius-sm);padding:14px;background:var(--bg-canvas);">
+              <strong style="display:block;margin-bottom:6px;color:var(--emerald);">${state.config.lang === 'en' ? 'Worship Facilities (Halal Ready)' : 'Fasilitas Ibadah & Ramah Muslim'}</strong>
+              <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;">
+                ${(d.fasilitasIbadah || []).map((f) => `<li>${esc(f)}</li>`).join('')}
+              </ul>
+            </div>
+            <div style="border:1px solid var(--border-hairline);border-radius:var(--radius-sm);padding:14px;background:var(--bg-canvas);">
+              <strong style="display:block;margin-bottom:6px;">${state.config.lang === 'en' ? 'General Facilities & Location' : 'Fasilitas Umum & Lokasi'}</strong>
+              <ul style="margin:0 0 8px;padding-left:18px;display:flex;flex-direction:column;gap:4px;">
+                ${(d.fasilitas || []).map((f) => `<li>${esc(f)}</li>`).join('')}
+              </ul>
+              <div class="meta-line">${esc(d.alamat)}</div>
+            </div>
+          </div>
+          <div class="notice-box" style="margin-bottom:16px;">
+            <strong>${state.config.lang === 'en' ? 'Verification & Cost Note:' : 'Catatan Verifikasi & Biaya:'}</strong>
+            ${esc(d.statusVerifikasiInfo)} · ${state.config.lang === 'en' ? 'Estimated ticket/entry:' : 'Estimasi biaya masuk:'} <span class="tabular">${esc(formatIDR(d.estimasiBiaya))}</span> (${esc(t('sim_tag'))}).
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--border-hairline);padding-top:16px;">
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <a href="${esc(d.mapsUrl)}" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">${esc(t('open_maps_btn'))}</a>
+              <button type="button" class="btn-secondary btn-sm" data-toggle-fav="${esc(d.id)}" data-fav-type="destinasi" id="modalFavBtn">${saved ? (state.config.lang === 'en' ? 'Saved in Favorites' : 'Tersimpan di Favorit') : (state.config.lang === 'en' ? 'Save to Favorites' : 'Simpan ke Favorit')}</button>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <select id="modalAddDay" class="select-field" style="width:auto;min-height:38px;padding:6px 10px;">
+                ${Array.from({ length: itin.jumlahHari }, (_, idx) => `<option value="${idx + 1}">${state.config.lang === 'en' ? 'Day' : 'Hari'} ${idx + 1}</option>`).join('')}
+              </select>
+              <button type="button" class="btn-secondary btn-sm" id="modalAddItinBtn" data-id="${esc(d.id)}">${esc(t('add_itin_btn'))}</button>
+            </div>
+          </div>
+        `;
+        document.getElementById('detailModalBackdrop').classList.add('open');
+      }
+
+      function openWhatsAppDemoModal(itemName, phone, kind) {
+        const langEn = state.config.lang === 'en';
+        const defaultMsg = langEn
+          ? `Assalamu'alaikum, I saw "${itemName}" (${kind}) on Pesona Explore Aceh. Could you share availability and halal information? (Demo simulation message)`
+          : `Assalamu'alaikum, saya melihat "${itemName}" (${kind}) di aplikasi Pesona Explore Aceh. Mohon informasi ketersediaan dan layanan ramah Muslim. (Pesan simulasi demo)`;
+        const digits = String(phone || '6281200000100').replace(/\D/g, '');
+        const modal = document.getElementById('waModalContent');
+        modal.innerHTML = `
+          <div class="modal-head">
+            <div>
+              <div class="meta-line">${langEn ? 'Demo Mode · Simulated Non-Personal Contact' : 'Mode Demo · Nomor Kontak Simulasi Nonpribadi'}</div>
+              <h3 id="waModalTitle" style="font-family:var(--font-display);font-size:1.55rem;margin:4px 0 0;">WhatsApp Demo — ${esc(itemName)}</h3>
+            </div>
+            <button type="button" class="close-btn" id="closeWaModalBtn" aria-label="Tutup modal WhatsApp">&times;</button>
+          </div>
+          <div class="field-group" style="margin-bottom:12px;">
+            <span class="field-label">${langEn ? 'Simulated Recipient Number' : 'Nomor Tujuan (Simulasi)'}</span>
+            <div class="tabular" style="padding:10px 12px;border:1px solid var(--border-hairline);border-radius:var(--radius-sm);background:var(--bg-canvas);">${esc(phone)}</div>
+          </div>
+          <div class="field-group" style="margin-bottom:16px;">
+            <label class="field-label" for="waDraftTextarea">${langEn ? 'Message Preview (Editable)' : 'Pratinjau Pesan (Dapat Diedit)'}</label>
+            <textarea id="waDraftTextarea" rows="4" class="textarea-field">${esc(defaultMsg)}</textarea>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a id="waExternalLink" href="https://wa.me/${esc(digits)}?text=${encodeURIComponent(defaultMsg)}" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">${langEn ? 'Open wa.me Link (Demo)' : 'Buka Tautan wa.me (Demo)'}</a>
+            <button type="button" class="btn-secondary btn-sm" id="copyWaMsgBtn">${langEn ? 'Copy Draft Message' : 'Salin Pesan'}</button>
+          </div>
+        `;
+        document.getElementById('waModalBackdrop').classList.add('open');
+
+        document.getElementById('waDraftTextarea').addEventListener('input', (e) => {
+          document.getElementById('waExternalLink').href = `https://wa.me/${digits}?text=${encodeURIComponent(e.target.value)}`;
+        });
+        document.getElementById('copyWaMsgBtn').addEventListener('click', () => {
+          const text = document.getElementById('waDraftTextarea').value;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(() => showToast(langEn ? 'Message copied' : 'Pesan disalin'));
+          } else {
+            showToast(langEn ? 'Draft ready in preview' : 'Draf siap disalin dari pratinjau');
+          }
+        });
+      }
+
+      /* =========================================================================
+       * 13. CRUD DASHBOARD (Destinasi, Kuliner, Akomodasi, Paket)
+       * ========================================================================= */
+      function renderCrudTable() {
+        document.querySelectorAll('[data-entity]').forEach((btn) => {
+          btn.classList.toggle('active', btn.getAttribute('data-entity') === state.ui.crudEntity);
+        });
+        const q = state.ui.crudSearch.trim().toLowerCase();
+        const table = document.getElementById('crudTable');
+        const entity = state.ui.crudEntity;
+
+        if (entity === 'destinasi') {
+          const rows = state.data.destinasi.filter((d) => !q || locText(d.nama).toLowerCase().includes(q) || d.wilayah.toLowerCase().includes(q));
+          table.innerHTML = `
+            <thead><tr><th>Nama Destinasi</th><th>Wilayah</th><th>Kategori</th><th>Verifikasi</th><th>Biaya (Simulasi)</th><th>Aksi</th></tr></thead>
+            <tbody>
+              ${rows.length === 0 ? '<tr><td colspan="6" style="text-align:center;padding:24px;">Tidak ada data</td></tr>' : rows.map((d) => `
+                <tr>
+                  <td><strong>${esc(locText(d.nama))}</strong></td>
+                  <td>${esc(d.wilayah)}</td>
+                  <td>${esc(d.kategori)}</td>
+                  <td>${esc(d.statusVerifikasiInfo)}</td>
+                  <td class="tabular">${esc(formatIDR(d.estimasiBiaya))}</td>
+                  <td style="white-space:nowrap;">
+                    <button type="button" class="btn-secondary btn-sm" data-crud-edit="destinasi|${esc(d.id)}">Edit</button>
+                    <button type="button" class="btn-secondary btn-sm btn-danger" data-crud-del="destinasi|${esc(d.id)}">Hapus</button>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          `;
+        } else if (entity === 'kuliner') {
+          const rows = state.data.kuliner.filter((k) => !q || k.nama.toLowerCase().includes(q) || k.wilayah.toLowerCase().includes(q));
+          table.innerHTML = `
+            <thead><tr><th>Nama Kuliner / UMKM</th><th>Wilayah</th><th>Status Sertifikasi Halal</th><th>Harga (Simulasi)</th><th>Aksi</th></tr></thead>
+            <tbody>
+              ${rows.length === 0 ? '<tr><td colspan="5" style="text-align:center;padding:24px;">Tidak ada data</td></tr>' : rows.map((k) => `
+                <tr>
+                  <td><strong>${esc(k.nama)}</strong></td>
+                  <td>${esc(k.wilayah)}</td>
+                  <td>${esc(k.statusSertifikasiHalal)}</td>
+                  <td class="tabular">${esc(formatIDR(k.harga))}</td>
+                  <td style="white-space:nowrap;">
+                    <button type="button" class="btn-secondary btn-sm" data-crud-edit="kuliner|${esc(k.id)}">Edit</button>
+                    <button type="button" class="btn-secondary btn-sm btn-danger" data-crud-del="kuliner|${esc(k.id)}">Hapus</button>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          `;
+        } else if (entity === 'akomodasi') {
+          const rows = state.data.akomodasi.filter((a) => !q || a.nama.toLowerCase().includes(q) || a.wilayah.toLowerCase().includes(q));
+          table.innerHTML = `
+            <thead><tr><th>Nama Akomodasi</th><th>Wilayah</th><th>Fasilitas Ramah Muslim</th><th>Tarif/Malam (Simulasi)</th><th>Aksi</th></tr></thead>
+            <tbody>
+              ${rows.length === 0 ? '<tr><td colspan="5" style="text-align:center;padding:24px;">Tidak ada data</td></tr>' : rows.map((a) => `
+                <tr>
+                  <td><strong>${esc(a.nama)}</strong></td>
+                  <td>${esc(a.wilayah)}</td>
+                  <td>${esc((a.fasilitasRamahMuslim || []).slice(0, 2).join(', '))}</td>
+                  <td class="tabular">${esc(formatIDR(a.hargaPerMalam))}</td>
+                  <td style="white-space:nowrap;">
+                    <button type="button" class="btn-secondary btn-sm" data-crud-edit="akomodasi|${esc(a.id)}">Edit</button>
+                    <button type="button" class="btn-secondary btn-sm btn-danger" data-crud-del="akomodasi|${esc(a.id)}">Hapus</button>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          `;
+        } else {
+          const rows = state.data.paket.filter((p) => !q || locText(p.nama).toLowerCase().includes(q));
+          table.innerHTML = `
+            <thead><tr><th>Nama Paket Wisata</th><th>Durasi</th><th>Wilayah</th><th>Estimasi Biaya (Simulasi)</th><th>Aksi</th></tr></thead>
+            <tbody>
+              ${rows.length === 0 ? '<tr><td colspan="5" style="text-align:center;padding:24px;">Tidak ada data</td></tr>' : rows.map((p) => `
+                <tr>
+                  <td><strong>${esc(locText(p.nama))}</strong></td>
+                  <td class="tabular">${p.durasi} Hari</td>
+                  <td>${esc((p.wilayahCakupan || []).join(', '))}</td>
+                  <td class="tabular">${esc(formatIDR(p.estimasiBiaya))}</td>
+                  <td style="white-space:nowrap;">
+                    <button type="button" class="btn-secondary btn-sm" data-crud-edit="paket|${esc(p.id)}">Edit</button>
+                    <button type="button" class="btn-secondary btn-sm btn-danger" data-crud-del="paket|${esc(p.id)}">Hapus</button>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          `;
+        }
+      }
+
+      function openCrudModal(entity, editId) {
+        const existing = editId ? state.data[entity].find((item) => item.id === editId) : null;
+        const modal = document.getElementById('crudModalContent');
+        const regionOpts = (sel) => REGIONS.map((r) => `<option value="${esc(r)}" ${sel === r ? 'selected' : ''}>${esc(r)}</option>`).join('');
+        const catOpts = (sel) => CATEGORIES.map((c) => `<option value="${esc(c)}" ${sel === c ? 'selected' : ''}>${esc(c)}</option>`).join('');
+
+        let fieldsHtml = '';
+        if (entity === 'destinasi') {
+          fieldsHtml = `
+            <div class="field-group"><label class="field-label">Nama Destinasi *</label><input required name="nama" class="input-field" value="${esc(existing ? locText(existing.nama) : '')}" /></div>
+            <div class="form-grid-2">
+              <div class="field-group"><label class="field-label">Wilayah</label><select name="wilayah" class="select-field">${regionOpts(existing && existing.wilayah)}</select></div>
+              <div class="field-group"><label class="field-label">Kategori</label><select name="kategori" class="select-field">${catOpts(existing && existing.kategori)}</select></div>
+            </div>
+            <div class="form-grid-2">
+              <div class="field-group"><label class="field-label">Estimasi Biaya (Rp)</label><input type="number" min="0" name="estimasiBiaya" class="input-field tabular" value="${existing ? existing.estimasiBiaya : 15000}" /></div>
+              <div class="field-group"><label class="field-label">Status Verifikasi Info</label>
+                <select name="statusVerifikasiInfo" class="select-field">
+                  <option value="Terverifikasi Dasar" ${existing && existing.statusVerifikasiInfo === 'Terverifikasi Dasar' ? 'selected' : ''}>Terverifikasi Dasar</option>
+                  <option value="Belum Diverifikasi Lapangan" ${!existing || existing.statusVerifikasiInfo !== 'Terverifikasi Dasar' ? 'selected' : ''}>Belum Diverifikasi Lapangan</option>
+                </select>
+              </div>
+            </div>
+            <div class="field-group"><label class="field-label">Alamat Lokasi *</label><input required name="alamat" class="input-field" value="${esc(existing ? existing.alamat : '')}" /></div>
+            <div class="field-group"><label class="field-label">Deskripsi *</label><textarea required name="deskripsi" rows="3" class="textarea-field">${esc(existing ? locText(existing.deskripsi) : '')}</textarea></div>
+            <div class="field-group"><label class="field-label">Fasilitas Ibadah (pisahkan dengan koma)</label><input name="fasilitasIbadah" class="input-field" value="${esc(existing ? (existing.fasilitasIbadah || []).join(', ') : 'Mushalla bersih, Tempat wudhu terpisah')}" /></div>
+            <div class="field-group"><label class="field-label">Fasilitas Umum (pisahkan dengan koma)</label><input name="fasilitas" class="input-field" value="${esc(existing ? (existing.fasilitas || []).join(', ') : 'Area parkir, Akses keluarga')}" /></div>
+          `;
+        } else if (entity === 'kuliner') {
+          fieldsHtml = `
+            <div class="field-group"><label class="field-label">Nama Kuliner / Produk UMKM *</label><input required name="nama" class="input-field" value="${esc(existing ? existing.nama : '')}" /></div>
+            <div class="form-grid-2">
+              <div class="field-group"><label class="field-label">Wilayah</label><select name="wilayah" class="select-field">${regionOpts(existing && existing.wilayah)}</select></div>
+              <div class="field-group"><label class="field-label">Kategori Produk</label><input required name="kategori" class="input-field" value="${esc(existing ? existing.kategori : 'Hidangan Utama')}" /></div>
+            </div>
+            <div class="form-grid-2">
+              <div class="field-group"><label class="field-label">Harga Simulasi (Rp)</label><input type="number" min="0" name="harga" class="input-field tabular" value="${existing ? existing.harga : 30000}" /></div>
+              <div class="field-group"><label class="field-label">Kontak Simulasi</label><input required name="kontak" class="input-field tabular" value="${esc(existing ? existing.kontak : '+62 812-0000-0199')}" /></div>
+            </div>
+            <div class="field-group"><label class="field-label">Status Sertifikasi Halal</label>
+              <select name="statusSertifikasiHalal" class="select-field">
+                <option value="Tersertifikasi Halal Resmi (Contoh Data)" ${existing && existing.statusSertifikasiHalal.includes('Resmi') ? 'selected' : ''}>Tersertifikasi Halal Resmi (Contoh Data)</option>
+                <option value="Klaim Mandiri / Dalam Verifikasi" ${existing && existing.statusSertifikasiHalal.includes('Mandiri') ? 'selected' : ''}>Klaim Mandiri / Dalam Verifikasi</option>
+                <option value="Belum Tersertifikasi Resmi" ${!existing || existing.statusSertifikasiHalal.includes('Belum') ? 'selected' : ''}>Belum Tersertifikasi Resmi</option>
+              </select>
+            </div>
+            <div class="field-group"><label class="field-label">Sumber Verifikasi *</label><input required name="sumberVerifikasi" class="input-field" value="${esc(existing ? existing.sumberVerifikasi : 'Belum ada nomor sertifikat resmi (Data Simulasi)')}" /></div>
+          `;
+        } else if (entity === 'akomodasi') {
+          fieldsHtml = `
+            <div class="field-group"><label class="field-label">Nama Akomodasi *</label><input required name="nama" class="input-field" value="${esc(existing ? existing.nama : '')}" /></div>
+            <div class="form-grid-2">
+              <div class="field-group"><label class="field-label">Wilayah</label><select name="wilayah" class="select-field">${regionOpts(existing && existing.wilayah)}</select></div>
+              <div class="field-group"><label class="field-label">Tarif/Malam Simulasi (Rp)</label><input type="number" min="0" name="hargaPerMalam" class="input-field tabular" value="${existing ? existing.hargaPerMalam : 450000}" /></div>
+            </div>
+            <div class="field-group"><label class="field-label">Fasilitas Ramah Muslim (pisahkan koma)</label><input name="fasilitasRamahMuslim" class="input-field" value="${esc(existing ? (existing.fasilitasRamahMuslim || []).join(', ') : 'Arah kiblat, Sajadah & mukena, Bebas alkohol')}" /></div>
+            <div class="field-group"><label class="field-label">Fasilitas Umum (pisahkan koma)</label><input name="fasilitas" class="input-field" value="${esc(existing ? (existing.fasilitas || []).join(', ') : 'Wi-Fi, Parkir, Sarapan halal')}" /></div>
+            <div class="field-group"><label class="field-label">Kontak Simulasi</label><input required name="kontak" class="input-field tabular" value="${esc(existing ? existing.kontak : '+62 812-0000-0299')}" /></div>
+          `;
+        } else {
+          fieldsHtml = `
+            <div class="field-group"><label class="field-label">Nama Paket Wisata *</label><input required name="nama" class="input-field" value="${esc(existing ? locText(existing.nama) : '')}" /></div>
+            <div class="form-grid-2">
+              <div class="field-group"><label class="field-label">Durasi (1–5 Hari)</label><input type="number" min="1" max="5" name="durasi" class="input-field tabular" value="${existing ? existing.durasi : 2}" /></div>
+              <div class="field-group"><label class="field-label">Estimasi Biaya/Org (Rp)</label><input type="number" min="0" name="estimasiBiaya" class="input-field tabular" value="${existing ? existing.estimasiBiaya : 1200000}" /></div>
+            </div>
+            <div class="field-group"><label class="field-label">Wilayah Cakupan (pisahkan koma)</label><input name="wilayahCakupan" class="input-field" value="${esc(existing ? (existing.wilayahCakupan || []).join(', ') : 'Banda Aceh, Aceh Besar')}" /></div>
+            <div class="field-group"><label class="field-label">Kategori Minat (pisahkan koma: Religi, Bahari, Alam, Budaya, Kuliner)</label><input name="minatKategori" class="input-field" value="${esc(existing ? (existing.minatKategori || []).join(', ') : 'Religi, Sejarah')}" /></div>
+            <div class="field-group"><label class="field-label">Deskripsi Paket *</label><textarea required name="deskripsi" rows="3" class="textarea-field">${esc(existing ? locText(existing.deskripsi) : '')}</textarea></div>
+          `;
+        }
+
+        modal.innerHTML = `
+          <div class="modal-head">
+            <h3 id="crudModalTitle" style="font-family:var(--font-display);font-size:1.55rem;margin:0;">${existing ? 'Edit' : 'Tambah'} ${esc(entity.toUpperCase())}</h3>
+            <button type="button" class="close-btn" id="closeCrudModalBtn" aria-label="Tutup form">&times;</button>
+          </div>
+          <form id="crudEntityForm" style="display:flex;flex-direction:column;gap:14px;">
+            ${fieldsHtml}
+            <div style="display:flex;justify-content:flex-end;gap:10px;padding-top:8px;">
+              <button type="button" class="btn-secondary btn-sm" id="cancelCrudBtn">Batal</button>
+              <button type="submit" class="btn-primary btn-sm">Simpan Perubahan</button>
+            </div>
+          </form>
+        `;
+        document.getElementById('crudModalBackdrop').classList.add('open');
+
+        document.getElementById('crudEntityForm').addEventListener('submit', (e) => {
+          e.preventDefault();
+          const fd = new FormData(e.target);
+          const splitCsv = (s) => String(s || '').split(',').map((x) => x.trim()).filter(Boolean);
+
+          if (entity === 'destinasi') {
+            const wilayah = fd.get('wilayah');
+            const regionPinDefaults = {
+              'Banda Aceh': { x: 215, y: 204 },
+              'Sabang': { x: 155, y: 98 },
+              'Aceh Besar': { x: 272, y: 278 },
+              'Aceh Tengah': { x: 525, y: 396 },
+              'Bener Meriah': { x: 495, y: 300 }
+            };
+            const nameVal = String(fd.get('nama')).trim();
+            const descVal = String(fd.get('deskripsi')).trim();
+            const payload = {
+              id: existing ? existing.id : 'dest-' + Date.now(),
+              nama: { id: nameVal, en: nameVal },
+              wilayah,
+              kategori: fd.get('kategori'),
+              estimasiBiaya: Number(fd.get('estimasiBiaya')) || 0,
+              statusVerifikasiInfo: fd.get('statusVerifikasiInfo'),
+              alamat: String(fd.get('alamat')).trim(),
+              mapsUrl: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(nameVal + ' ' + wilayah + ' Aceh'),
+              deskripsi: { id: descVal, en: descVal },
+              fasilitasIbadah: splitCsv(fd.get('fasilitasIbadah')),
+              fasilitas: splitCsv(fd.get('fasilitas')),
+              imageUrl: existing ? existing.imageUrl : (wilayah === 'Sabang' ? IMG_SABANG : (wilayah === 'Aceh Tengah' || wilayah === 'Bener Meriah' ? IMG_GAYO : IMG_MOSQUE)),
+              unggulan: existing ? existing.unggulan : false,
+              mapCoords: existing ? existing.mapCoords : (regionPinDefaults[wilayah] || { x: 260, y: 250 })
+            };
+            if (existing) Object.assign(existing, payload);
+            else state.data.destinasi.unshift(payload);
+          } else if (entity === 'kuliner') {
+            const payload = {
+              id: existing ? existing.id : 'kul-' + Date.now(),
+              nama: String(fd.get('nama')).trim(),
+              wilayah: fd.get('wilayah'),
+              kategori: String(fd.get('kategori')).trim(),
+              harga: Number(fd.get('harga')) || 0,
+              kontak: String(fd.get('kontak')).trim(),
+              statusSertifikasiHalal: fd.get('statusSertifikasiHalal'),
+              sumberVerifikasi: String(fd.get('sumberVerifikasi')).trim(),
+              imageUrl: existing ? existing.imageUrl : IMG_KULINER
+            };
+            if (existing) Object.assign(existing, payload);
+            else state.data.kuliner.unshift(payload);
+          } else if (entity === 'akomodasi') {
+            const payload = {
+              id: existing ? existing.id : 'ako-' + Date.now(),
+              nama: String(fd.get('nama')).trim(),
+              wilayah: fd.get('wilayah'),
+              hargaPerMalam: Number(fd.get('hargaPerMalam')) || 0,
+              fasilitasRamahMuslim: splitCsv(fd.get('fasilitasRamahMuslim')),
+              fasilitas: splitCsv(fd.get('fasilitas')),
+              kontak: String(fd.get('kontak')).trim(),
+              imageUrl: existing ? existing.imageUrl : IMG_RESORT
+            };
+            if (existing) Object.assign(existing, payload);
+            else state.data.akomodasi.unshift(payload);
+          } else {
+            const nameVal = String(fd.get('nama')).trim();
+            const descVal = String(fd.get('deskripsi')).trim();
+            const payload = {
+              id: existing ? existing.id : 'pkg-' + Date.now(),
+              nama: { id: nameVal, en: nameVal },
+              durasi: Math.min(5, Math.max(1, Number(fd.get('durasi')) || 1)),
+              estimasiBiaya: Number(fd.get('estimasiBiaya')) || 0,
+              wilayahCakupan: splitCsv(fd.get('wilayahCakupan')),
+              minatKategori: splitCsv(fd.get('minatKategori')),
+              deskripsi: { id: descVal, en: descVal },
+              daftarDestinasi: existing ? existing.daftarDestinasi : [state.data.destinasi[0] ? state.data.destinasi[0].id : 'dest-baiturrahman']
+            };
+            if (existing) Object.assign(existing, payload);
+            else state.data.paket.unshift(payload);
+          }
+
+          safeSave(STORAGE_KEYS.data, state.data);
+          document.getElementById('crudModalBackdrop').classList.remove('open');
+          showToast(existing ? 'Data berhasil diperbarui' : 'Data baru ditambahkan');
+          renderAll();
+        });
+      }
+
+      /* =========================================================================
+       * 14. EVENT WIRING & INITIALIZATION
+       * ========================================================================= */
+      function renderAll() {
+        applyI18n();
+        renderDestinations();
+        renderMap();
+        renderKulinerAkomodasi();
+        renderPlanner();
+        renderFavDrawer();
+        renderCrudTable();
+      }
+
+      // Mobile drawer toggle
+      document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+        const drawer = document.getElementById('mobileDrawer');
+        const open = drawer.classList.toggle('open');
+        document.getElementById('mobileMenuBtn').setAttribute('aria-expanded', String(open));
+      });
+      document.getElementById('mobileDrawer').addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') {
+          document.getElementById('mobileDrawer').classList.remove('open');
+        }
+      });
+
+      // Language switching
+      document.querySelectorAll('[data-lang]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          state.config.lang = btn.getAttribute('data-lang');
+          safeSave(STORAGE_KEYS.config, state.config);
+          renderAll();
+        });
+      });
+
+      // Destination search & sorting
+      document.getElementById('destSearchInput').addEventListener('input', (e) => {
+        state.ui.search = e.target.value;
+        renderDestinations();
+      });
+      document.getElementById('destSortSelect').addEventListener('change', (e) => {
+        state.ui.sort = e.target.value;
+        renderDestinations();
+      });
+
+      // Global delegated click handler
+      document.addEventListener('click', (e) => {
+        const tEl = e.target.closest('button, [data-map-pin]');
+        if (!tEl) return;
+
+        if (tEl.hasAttribute('data-filter-region')) {
+          state.ui.region = tEl.getAttribute('data-filter-region');
+          renderDestinations();
+          return;
+        }
+        if (tEl.hasAttribute('data-filter-category')) {
+          state.ui.category = tEl.getAttribute('data-filter-category');
+          renderDestinations();
+          return;
+        }
+        if (tEl.id === 'resetDestFiltersBtn') {
+          state.ui.search = '';
+          state.ui.region = 'all';
+          state.ui.category = 'all';
+          document.getElementById('destSearchInput').value = '';
+          renderDestinations();
+          return;
+        }
+        if (tEl.hasAttribute('data-map-region')) {
+          state.ui.mapRegion = tEl.getAttribute('data-map-region');
+          renderMap();
+          return;
+        }
+        if (tEl.hasAttribute('data-map-pin')) {
+          state.ui.selectedDestId = tEl.getAttribute('data-map-pin');
+          renderMap();
+          return;
+        }
+        if (tEl.hasAttribute('data-filter-catalog-region')) {
+          state.ui.region = tEl.getAttribute('data-filter-catalog-region');
+          renderDestinations();
+          document.getElementById('destinasi').scrollIntoView({ behavior: 'smooth' });
+          return;
+        }
+        if (tEl.hasAttribute('data-open-detail')) {
+          openDetailModal(tEl.getAttribute('data-open-detail'));
+          return;
+        }
+        if (tEl.hasAttribute('data-toggle-fav')) {
+          toggleFavorite(tEl.getAttribute('data-toggle-fav'), tEl.getAttribute('data-fav-type'));
+          if (tEl.id === 'modalFavBtn') {
+            const nowSaved = isFavorited(tEl.getAttribute('data-toggle-fav'), 'destinasi');
+            tEl.textContent = nowSaved ? (state.config.lang === 'en' ? 'Saved in Favorites' : 'Tersimpan di Favorit') : (state.config.lang === 'en' ? 'Save to Favorites' : 'Simpan ke Favorit');
+          }
+          return;
+        }
+        if (tEl.hasAttribute('data-remove-fav-id')) {
+          toggleFavorite(tEl.getAttribute('data-remove-fav-id'), tEl.getAttribute('data-remove-fav-type'));
+          return;
+        }
+        if (tEl.hasAttribute('data-quick-itin')) {
+          const itemId = tEl.getAttribute('data-quick-itin');
+          const tipe = tEl.getAttribute('data-quick-type');
+          const item = findCatalogItem(itemId, tipe);
+          if (item) {
+            const cost = tipe === 'destinasi' ? item.estimasiBiaya : tipe === 'kuliner' ? item.harga : item.hargaPerMalam;
+            addActivityToActiveItinerary(locText(item.nama), tipe, item.id, item.wilayah, cost, 1, 'Pagi');
+            showToast(state.config.lang === 'en' ? 'Added to Day 1 of Itinerary' : 'Ditambahkan ke Hari 1 Itinerary');
+          }
+          return;
+        }
+        if (tEl.id === 'modalAddItinBtn') {
+          const id = tEl.getAttribute('data-id');
+          const d = state.data.destinasi.find((x) => x.id === id);
+          const day = document.getElementById('modalAddDay').value;
+          if (d) {
+            addActivityToActiveItinerary(locText(d.nama), 'destinasi', d.id, d.wilayah, d.estimasiBiaya, day, 'Pagi');
+            document.getElementById('detailModalBackdrop').classList.remove('open');
+            showToast(`${locText(d.nama)} -> Hari ${day}`);
+          }
+          return;
+        }
+        if (tEl.hasAttribute('data-ka-region')) {
+          state.ui.kaRegion = tEl.getAttribute('data-ka-region');
+          renderKulinerAkomodasi();
+          return;
+        }
+        if (tEl.hasAttribute('data-ka-halal')) {
+          state.ui.kaHalalFilter = tEl.getAttribute('data-ka-halal');
+          renderKulinerAkomodasi();
+          return;
+        }
+        if (tEl.hasAttribute('data-wa-demo')) {
+          openWhatsAppDemoModal(tEl.getAttribute('data-wa-demo'), tEl.getAttribute('data-wa-phone'), tEl.getAttribute('data-wa-kind'));
+          return;
+        }
+        if (tEl.hasAttribute('data-apply-accom-rate')) {
+          const itin = getActiveItinerary();
+          itin.biayaAkomodasiPerMalam = Number(tEl.getAttribute('data-apply-accom-rate')) || 0;
+          persistItineraries();
+          renderPlanner();
+          document.getElementById('perencanaan').scrollIntoView({ behavior: 'smooth' });
+          showToast(state.config.lang === 'en' ? 'Nightly rate applied to calculator' : 'Tarif kamar diterapkan ke kalkulator');
+          return;
+        }
+        if (tEl.hasAttribute('data-del-act')) {
+          const actId = tEl.getAttribute('data-del-act');
+          const itin = getActiveItinerary();
+          itin.daftarAktivitas = itin.daftarAktivitas.filter((a) => a.id !== actId);
+          persistItineraries();
+          renderPlanner();
+          return;
+        }
+        if (tEl.hasAttribute('data-apply-pkg')) {
+          const pkg = state.data.paket.find((p) => p.id === tEl.getAttribute('data-apply-pkg'));
+          if (pkg) {
+            const newItin = {
+              id: 'itin-pkg-' + Date.now(),
+              namaPerjalanan: locText(pkg.nama),
+              tanggalMulai: new Date().toISOString().slice(0, 10),
+              jumlahHari: pkg.durasi,
+              jumlahWisatawan: 2,
+              biayaAkomodasiPerMalam: 500000,
+              biayaMakanPerHari: 120000,
+              biayaTransportPerHari: 250000,
+              daftarAktivitas: (pkg.daftarDestinasi || []).map((destId, idx) => {
+                const d = state.data.destinasi.find((x) => x.id === destId);
+                return {
+                  id: 'act-p-' + idx + '-' + Date.now(),
+                  hariKe: Math.min(pkg.durasi, Math.floor(idx / 2) + 1),
+                  waktu: idx % 2 === 0 ? 'Pagi' : 'Sore',
+                  judul: d ? locText(d.nama) : destId,
+                  tipe: 'destinasi',
+                  itemId: destId,
+                  wilayah: d ? d.wilayah : 'Aceh',
+                  estimasiBiaya: d ? d.estimasiBiaya : 0
+                };
+              }),
+              totalAnggaran: 0
+            };
+            state.itineraries.unshift(newItin);
+            state.config.activeItinId = newItin.id;
+            state.ui.planTab = 'itinerary';
+            persistItineraries();
+            renderPlanner();
+            showToast(state.config.lang === 'en' ? 'Package applied to Itinerary Planner' : 'Paket diterapkan ke Itinerary Planner');
+          }
+          return;
+        }
+        if (tEl.hasAttribute('data-entity')) {
+          state.ui.crudEntity = tEl.getAttribute('data-entity');
+          renderCrudTable();
+          return;
+        }
+        if (tEl.hasAttribute('data-crud-edit')) {
+          const [ent, id] = tEl.getAttribute('data-crud-edit').split('|');
+          openCrudModal(ent, id);
+          return;
+        }
+        if (tEl.hasAttribute('data-crud-del')) {
+          const [ent, id] = tEl.getAttribute('data-crud-del').split('|');
+          state.data[ent] = state.data[ent].filter((x) => x.id !== id);
+          safeSave(STORAGE_KEYS.data, state.data);
+          showToast(state.config.lang === 'en' ? 'Record deleted' : 'Data dihapus');
+          renderAll();
+          return;
+        }
+        if (tEl.id === 'closeDetailModalBtn') {
+          document.getElementById('detailModalBackdrop').classList.remove('open');
+        }
+        if (tEl.id === 'closeWaModalBtn') {
+          document.getElementById('waModalBackdrop').classList.remove('open');
+        }
+        if (tEl.id === 'closeCrudModalBtn' || tEl.id === 'cancelCrudBtn') {
+          document.getElementById('crudModalBackdrop').classList.remove('open');
+        }
+      });
+
+      // Tabs for Kuliner / Akomodasi
+      document.getElementById('tabKulinerBtn').addEventListener('click', () => {
+        state.ui.kaTab = 'kuliner';
+        renderKulinerAkomodasi();
+      });
+      document.getElementById('tabAkomodasiBtn').addEventListener('click', () => {
+        state.ui.kaTab = 'akomodasi';
+        renderKulinerAkomodasi();
+      });
+
+      // Tabs for Planner / Packages
+      document.getElementById('tabPlannerBtn').addEventListener('click', () => {
+        state.ui.planTab = 'itinerary';
+        renderPlanner();
+      });
+      document.getElementById('tabPackagesBtn').addEventListener('click', () => {
+        state.ui.planTab = 'packages';
+        renderPlanner();
+      });
+
+      // Package rule-based filters
+      document.getElementById('recInterestSelect').addEventListener('change', (e) => {
+        state.ui.recInterest = e.target.value;
+        renderPackages();
+      });
+      document.getElementById('recDurationSelect').addEventListener('change', (e) => {
+        state.ui.recDuration = e.target.value;
+        renderPackages();
+      });
+      document.getElementById('recBudgetSelect').addEventListener('change', (e) => {
+        state.ui.recBudget = e.target.value;
+        renderPackages();
+      });
+
+      // Itinerary bindings
+      document.getElementById('savedItinerarySelect').addEventListener('change', (e) => {
+        state.config.activeItinId = e.target.value;
+        persistItineraries();
+        renderPlanner();
+      });
+      document.getElementById('newItineraryBtn').addEventListener('click', () => {
+        const newItin = {
+          id: 'itin-' + Date.now(),
+          namaPerjalanan: state.config.lang === 'en' ? 'New Aceh Trip' : 'Perjalanan Aceh Baru',
+          tanggalMulai: new Date().toISOString().slice(0, 10),
+          jumlahHari: 3,
+          jumlahWisatawan: 2,
+          biayaAkomodasiPerMalam: 450000,
+          biayaMakanPerHari: 120000,
+          biayaTransportPerHari: 250000,
+          daftarAktivitas: [],
+          totalAnggaran: 0
+        };
+        state.itineraries.unshift(newItin);
+        state.config.activeItinId = newItin.id;
+        persistItineraries();
+        renderPlanner();
+        showToast(state.config.lang === 'en' ? 'New itinerary created' : 'Itinerary baru dibuat');
+      });
+      document.getElementById('deleteItineraryBtn').addEventListener('click', () => {
+        if (state.itineraries.length <= 1) {
+          getActiveItinerary().daftarAktivitas = [];
+        } else {
+          state.itineraries = state.itineraries.filter((i) => i.id !== state.config.activeItinId);
+          state.config.activeItinId = state.itineraries[0].id;
+        }
+        persistItineraries();
+        renderPlanner();
+        showToast(state.config.lang === 'en' ? 'Itinerary updated' : 'Itinerary diperbarui');
+      });
+
+      ['itinNameInput', 'itinDateInput', 'itinDaysSelect', 'itinTravelersInput', 'calcAccomInput', 'calcMealInput', 'calcTransInput'].forEach((id) => {
+        document.getElementById(id).addEventListener('input', () => {
+          const itin = getActiveItinerary();
+          itin.namaPerjalanan = document.getElementById('itinNameInput').value || 'Trip Aceh';
+          itin.tanggalMulai = document.getElementById('itinDateInput').value || '2026-12-12';
+          itin.jumlahHari = Math.min(5, Math.max(1, Number(document.getElementById('itinDaysSelect').value) || 1));
+          itin.jumlahWisatawan = Math.max(1, Number(document.getElementById('itinTravelersInput').value) || 1);
+          itin.biayaAkomodasiPerMalam = Math.max(0, Number(document.getElementById('calcAccomInput').value) || 0);
+          itin.biayaMakanPerHari = Math.max(0, Number(document.getElementById('calcMealInput').value) || 0);
+          itin.biayaTransportPerHari = Math.max(0, Number(document.getElementById('calcTransInput').value) || 0);
+          persistItineraries();
+          renderPlanner();
+        });
+      });
+
+      document.getElementById('actSourceSelect').addEventListener('change', (e) => {
+        const val = e.target.value;
+        if (val === 'custom') return;
+        const [tipe, id] = val.split('|');
+        const item = findCatalogItem(id, tipe);
+        if (item) {
+          document.getElementById('actCustomTitle').value = locText(item.nama);
+          document.getElementById('actCustomCost').value = tipe === 'destinasi' ? item.estimasiBiaya : item.harga;
+        }
+      });
+
+      document.getElementById('addActivityBtn').addEventListener('click', () => {
+        const src = document.getElementById('actSourceSelect').value;
+        let tipe = 'custom', itemId = null, wilayah = 'Aceh';
+        if (src !== 'custom') {
+          const parts = src.split('|');
+          tipe = parts[0];
+          itemId = parts[1];
+          const found = findCatalogItem(itemId, tipe);
+          if (found) wilayah = found.wilayah;
+        }
+        const title = document.getElementById('actCustomTitle').value.trim();
+        if (!title) {
+          showToast(state.config.lang === 'en' ? 'Enter an activity title first' : 'Isi nama aktivitas terlebih dahulu');
+          return;
+        }
+        const cost = Number(document.getElementById('actCustomCost').value) || 0;
+        const day = document.getElementById('actDaySelect').value;
+        const time = document.getElementById('actTimeSelect').value;
+        addActivityToActiveItinerary(title, tipe, itemId, wilayah, cost, day, time);
+        document.getElementById('actCustomTitle').value = '';
+        document.getElementById('actCustomCost').value = '0';
+        document.getElementById('actSourceSelect').value = 'custom';
+        showToast(state.config.lang === 'en' ? 'Activity added' : 'Aktivitas ditambahkan');
+      });
+
+      document.getElementById('exportItineraryBtn').addEventListener('click', () => {
+        const itin = getActiveItinerary();
+        const blob = new Blob([JSON.stringify(itin, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'itinerary-pesona-aceh.json';
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+      document.getElementById('printItineraryBtn').addEventListener('click', () => window.print());
+
+      // CRUD controls
+      document.getElementById('crudSearchInput').addEventListener('input', (e) => {
+        state.ui.crudSearch = e.target.value;
+        renderCrudTable();
+      });
+      document.getElementById('crudAddBtn').addEventListener('click', () => openCrudModal(state.ui.crudEntity, null));
+      document.getElementById('crudResetBtn').addEventListener('click', () => {
+        state.data = cloneSeed();
+        safeSave(STORAGE_KEYS.data, state.data);
+        showToast(state.config.lang === 'en' ? 'Sample data restored' : 'Data contoh berhasil dipulihkan');
+        renderAll();
+      });
+
+      // Drawers & Backdrop Close
+      document.getElementById('openFavBtn').addEventListener('click', () => {
+        renderFavDrawer();
+        document.getElementById('favDrawerBackdrop').classList.add('open');
+      });
+      document.getElementById('closeFavBtn').addEventListener('click', () => {
+        document.getElementById('favDrawerBackdrop').classList.remove('open');
+      });
+      ['detailModalBackdrop', 'waModalBackdrop', 'crudModalBackdrop', 'favDrawerBackdrop'].forEach((id) => {
+        document.getElementById(id).addEventListener('click', (e) => {
+          if (e.target.id === id) e.target.classList.remove('open');
+        });
+      });
+
+      // Boot
+      renderAll();
+    })();
+  </script>
+</body>
+</html>
